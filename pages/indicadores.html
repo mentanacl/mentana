@@ -16,29 +16,14 @@
     
     <!-- Sección de perfil -->
     <div class="perfil-header" style="text-align:center; margin-bottom:20px;">
-      <img src="../assets/foto-perfil.png" alt="Foto de Perfil" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid #4f46e5;">
+      
+      <img src="../usuario.png" alt="Foto de Perfil" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid #4f46e5;">
       <h2>Juan Pérez</h2>
-      <p style="color:#ccc;">Edad: 31 | Ocupación: Diseñador Gráfico</p>
-      <p style="max-width:500px;margin:auto;">Perfil preliminar de indicadores de salud mental, basado en autoevaluación y hábitos registrados.</p>
+      <p style="color:#ccc;">Perfil Emocional Preeliminar | Edad: {{$_edad}}.</p>
     
 <!-- Gráficos detallados -->
     <div class="tarjeta-contenido-principal">
       <div class="carousel-container">
-        <div class="carousel-cards" id="carrusel-secundario">
-          <div class="card">
-            <h3>Niveles Estrés</h3>
-            <canvas id="chartEstres" height="150" width="0"></canvas>
-          </div>
-          <div class="card">
-            <h3>Niveles Sueño</h3>
-            <canvas id="chartSueno" height="180"></canvas>
-          </div>
-          <div class="card">
-            <h3>Niveles Fatiga</h3>
-            <canvas id="chartFatiga" height="180"></canvas>
-          </div>
-        </div>
-      </div>
 	  <div class="carousel-container">
         <div class="carousel-cards" id="carrusel-principal">
           <div class="card">
@@ -57,6 +42,22 @@
 		
       </div>
 	  <div class="carousel-indicators" id="indicators-principal"></div>
+        <div class="carousel-cards" id="carrusel-secundario">
+          <div class="card">
+            <h3>Niveles Estrés</h3>
+            <canvas id="chartEstres" height="150" width="0"></canvas>
+          </div>
+          <div class="card">
+            <h3>Niveles Sueño</h3>
+            <canvas id="chartSueno" height="180"></canvas>
+          </div>
+          <div class="card">
+            <h3>Niveles Fatiga</h3>
+            <canvas id="chartFatiga" height="180"></canvas>
+          </div>
+        </div>
+      </div>
+	  <div class="carousel-indicators" id="indicators-secundario"></div>
     </div>
 
     </div>
