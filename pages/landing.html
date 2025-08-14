@@ -3,52 +3,384 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mentana - La entrada a tu mente sana.</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles/style_index.css" />
+  <title>Mentana</title>
+  <style>
+    :root{
+      --bg:#112244;           /* slate-900 */
+      --card:#111827;         /* gray-900 */
+      --muted:#94a3b8;        /* slate-400 */
+      --text:#e5e7eb;         /* gray-200 */
+      --accent:#22c55e;       /* green-500 */
+      --accent-2:#38bdf8;     /* sky-400 */
+      --warning:#fbbf24;      /* amber-400 */
+      --danger:#ef4444;       /* red-500 */
+      --lock:#64748b;         /* slate-500 */
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Noto Sans',sans-serif;
+      background:radial-gradient(1200px 600px at 20% -10%, #1e293b 0, transparent 60%),
+                 radial-gradient(1200px 600px at 120% 10%, #0b2a33 0, transparent 60%),
+                 var(--bg);
+      color:var(--text);
+      min-height:100dvh;
+    }
+    header{
+      padding:24px 20px 8px; max-width:1000px; margin:0 auto;
+    }
+    .title{font-size:clamp(20px,2.6vw,34px); font-weight:800; letter-spacing:.3px;}
+    .subtitle{color:var(--muted); margin-top:6px}
+
+    .topbar{display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-top:14px}
+    .progress-wrap{flex:1; background:#0b1220; border:1px solid #1f2937; border-radius:16px; padding:10px}
+    .progress-label{display:flex; justify-content:space-between; font-size:12px; color:var(--muted); margin-bottom:6px}
+    .progress{height:10px; background:#0b1220; border-radius:999px; overflow:hidden; border:1px solid #1f2937}
+    .progress>div{height:100%; width:0%; background:linear-gradient(90deg,var(--accent-2), var(--accent)); transition:width .5s ease}
+    .btn{border:none; padding:10px 14px; border-radius:12px; background:#1f2937; color:var(--text); cursor:pointer}
+    .btn:hover{filter:brightness(1.15)}
+    .btn.secondary{background:#0b1220; border:1px solid #1f2937}
+
+    main{max-width:1000px; margin:20px auto 80px; padding:0 20px;}
+    .grid{display:grid; gap:16px; grid-template-columns:repeat(12,1fr)}
+    .card{grid-column:span 12; background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(255,255,255,.01));
+      border:1px solid #1f2937; border-radius:18px; padding:16px; position:relative; overflow:hidden}
+    @media(min-width:720px){
+      .card{grid-column:span 6}
+    }
+    .card h3{margin:0 0 6px; font-size:18px}
+    .pill{display:inline-flex; align-items:center; gap:6px; font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid #223148; color:var(--muted)}
+    .locked .pill{color:#cbd5e1; border-color:#334155}
+    .status{position:absolute; top:14px; right:14px; font-size:12px; color:var(--muted)}
+    .actions{display:flex; gap:8px; margin-top:12px}
+    .action{padding:10px 12px; border-radius:12px; border:1px solid #223148; background:#0b1220; color:var(--text); cursor:pointer}
+    .action:disabled{opacity:.5; cursor:not-allowed}
+
+    .lock{display:inline-flex; width:16px; height:16px; align-items:center; justify-content:center; color:var(--lock)}
+
+    /* Panel flotante de cuestionario */
+    dialog{width:min(720px, 92vw); border:1px solid #1f2937; border-radius:16px; padding:0; background:#0b1220; color:var(--text)}
+    dialog::backdrop{background:rgba(0,0,0,.6)}
+    .modal-header{display:flex; justify-content:space-between; align-items:center; padding:16px; border-bottom:1px solid #1f2937}
+    .modal-body{padding:16px; max-height:65dvh; overflow:auto}
+    .q{margin-bottom:16px; padding:12px; background:#0e1527; border:1px solid #1f2937; border-radius:12px}
+    .q legend{font-weight:600; margin-bottom:8px}
+    .q label{display:block; margin:6px 0}
+    .modal-footer{display:flex; gap:8px; justify-content:flex-end; padding:16px; border-top:1px solid #1f2937}
+
+    .tag{padding:4px 8px; border-radius:999px; background:#052d22; color:#a7f3d0; border:1px solid #064e3b; font-size:12px}
+    .badge{padding:4px 8px; border-radius:999px; background:#0d1b2a; border:1px solid #1f2937; color:#93c5fd; font-size:12px}
+    .done{background:#052d22; color:#86efac; border-color:#14532d}
+
+    /* Toast */
+    .toast{position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#111827; color:var(--text); border:1px solid #1f2937; padding:10px 14px; border-radius:12px; opacity:0; pointer-events:none}
+    .toast.show{opacity:1; animation:fade 2.2s ease forwards}
+    @keyframes fade{0%{opacity:0; transform:translate(-50%,20px)} 10%{opacity:1; transform:translate(-50%,0)} 90%{opacity:1} 100%{opacity:0; transform:translate(-50%,-10px)}}
+
+    /* Confetti minimal */
+    .confetti{position:fixed; inset:0; pointer-events:none}
+  </style>
 </head>
 <body>
-  <div class="contenedor-principal-adaptado">
-    <div class="seccion-logo">
-      <img src="assets/salud-mental.png" alt="Logo Mentana" />
-    </div>
-    <h2>Descubre tu<br>Perfil Emocional Preliminar</h2>
-    <div class="tarjeta-contenido-principal">
-      <div class="carousel-container">
-        <div class="carousel-cards" id="carrusel-principal">
-          <div class="card"><h3>Datos importantes</h3><p>7 de cada 10 personas en Chile declaran haber tenido alguna enfermedad o problema psicológico.</p></div>
-          <div class="card"><h3>Datos importantes</h3><p>El 47% de las personas que necesitó ver a un profesional del área no lo hizo por falta de financiamiento.</p></div>
-          <div class="card"><h3>Datos importantes</h3><p>El 17.5% de las mujeres ha sufrido algún trastorno de ansiedad en su vida, frente al 9.5% de los hombres.</p></div>
-          <div class="card"><h3>Datos importantes</h3><p>Un 75% de las personas entre 22 y 35 años reporta haber tenido alguna enfermedad o problema psicológico.</p></div>
-          <div class="card"><h3>Datos importantes</h3><p>El 58.3% de los trabajadores chilenos percibió algún tipo de estrés laboral.</p></div>
-          <div class="card"><h3>Datos importantes</h3><p>El 26.6% del rango de edad de 30 a 39 años percibe una mayor soledad.</p></div>
-          <div class="card"><h3>Datos importantes</h3><p>El 53.8% de las personas con problemas de insomnio evidenció síntomas moderados o severos de depresión.</p></div>
+  <header>
+    <div class="title">Perfil Emocional Preeliminar</div>
+    <div class="subtitle">Desbloquea cada mundo completando su cuestionario. Guarda tu progreso automáticamente en este navegador.</div>
+
+    <div class="topbar">
+      <div class="progress-wrap" aria-label="Progreso total">
+        <div class="progress-label">
+          <span>Progreso</span>
+          <span id="progressText">0 / 4 completados</span>
         </div>
+        <div class="progress"><div id="progressBar"></div></div>
       </div>
-      <div class="carousel-indicators" id="indicators-principal"></div>
+      <button id="reset" class="btn secondary" title="Reiniciar progreso">Reiniciar</button>
     </div>
-    <p>Estamos construyendo el futuro del bienestar emocional.<br><strong>Únete al viaje.</strong></p>
-    <div class="botones-accion">
-      <a href="pages/registro.html" class="btn btn-primary">Regístrate</a>
-      <a href="pages/login.html" class="btn btn-secondary">Inicia Sesión</a>
-    </div>
-    <div class="tarjeta-contenido-secundario">
-      <div class="carousel-container">
-        <div class="carousel-cards" id="carrusel-secundario">
-          <div class="card"><h3>Match Inteligente</h3><p>Conectamos a cada persona con el profesional ideal según sus síntomas, perfil y contexto personal.</p></div>
-          <div class="card"><h3>Atención 360°</h3><p>Presencia en todas las etapas: antes, durante y después del proceso terapéutico.</p></div>
-          <div class="card"><h3>Quiz Especializados</h3><p>Evaluaciones psicológicas basadas en criterios sociales, culturales, económicos y demográficos.</p></div>
-          <div class="card"><h3>Contenido Educativo</h3><p>Biblioteca de recursos para el aprendizaje continuo sobre bienestar mental y emocional.</p></div>
-          <div class="card"><h3>Seguimiento Continuo</h3><p>Seguimiento y soporte personalizado más allá de las sesiones clínicas.</p></div>
-          <div class="card"><h3>Acceso Ágil y Seguro</h3><p>Una experiencia rápida, confidencial y empática desde cualquier dispositivo.</p></div>
+  </header>
+
+  <main>
+    <section class="grid" id="levels">
+      <!-- Tarjetas de niveles -->
+      <!-- 1. Estrés -->
+      <article class="card" data-key="estres">
+        <div class="status"><span class="badge">Nivel 1</span></div>
+        <h3>Estrés</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔓</span> Estado: <b class="state">Disponible</b></span>
+        <p class="subtitle">Cuestionario breve sobre tensión, carga y recuperación.</p>
+        <div class="actions">
+          <button class="action open">Responder</button>
+          <button class="action view" disabled>Ver resultado</button>
         </div>
-      </div>
-      <div class="carousel-indicators" id="indicators-secundario"></div>
+      </article>
+
+      <!-- 2. Soledad (bloqueado al inicio) -->
+      <article class="card locked" data-key="soledad">
+        <div class="status"><span class="badge">Nivel 2</span></div>
+        <h3>Soledad</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
+        <p class="subtitle">Percepción de conexión y apoyo social.</p>
+        <div class="actions">
+          <button class="action open" disabled>Responder</button>
+          <button class="action view" disabled>Ver resultado</button>
+        </div>
+      </article>
+
+      <!-- 3. Depresión -->
+      <article class="card locked" data-key="depresion">
+        <div class="status"><span class="badge">Nivel 3</span></div>
+        <h3>Depresión</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
+        <p class="subtitle">Estado de ánimo, interés y energía reciente.</p>
+        <div class="actions">
+          <button class="action open" disabled>Responder</button>
+          <button class="action view" disabled>Ver resultado</button>
+        </div>
+      </article>
+
+      <!-- 4. Ansiedad -->
+      <article class="card locked" data-key="ansiedad">
+        <div class="status"><span class="badge">Nivel 4</span></div>
+        <h3>Ansiedad</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
+        <p class="subtitle">Preocupación, nerviosismo e inquietud.</p>
+        <div class="actions">
+          <button class="action open" disabled>Responder</button>
+          <button class="action view" disabled>Ver resultado</button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- Modal de cuestionarios -->
+  <dialog id="quizModal" aria-labelledby="quizTitle">
+    <div class="modal-header">
+      <strong id="quizTitle">Cuestionario</strong>
+      <button class="btn secondary" id="closeModal">Cerrar</button>
     </div>
-    <footer>
-      <p><strong>&copy; 2025 Mentana &#x1F9E0;<br>Todos los derechos reservados.</strong></p>
+    <form id="quizForm" class="modal-body">
+      <!-- Preguntas se inyectan dinámicamente -->
+    </form>
+    <div class="modal-footer">
+      <span id="scoreHint" class="subtitle" aria-live="polite"></span>
+      <button class="btn" id="submitQuiz">Enviar</button>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <canvas class="confetti" id="confetti" width="0" height="0"></canvas>
+
+  <script>
+    // --- Datos de niveles y preguntas ---
+    const LEVELS = [
+      {
+        key: 'estres', name: 'Estrés', unlocks: 'soledad',
+        questions: [
+          { t: 'En los últimos 7 días, ¿qué tan tenso te has sentido?', opts: ['Nada','Un poco','Bastante','Mucho'] },
+          { t: '¿Con qué frecuencia hiciste pausas o descansos?', opts: ['Siempre','A menudo','A veces','Casi nunca'] },
+          { t: 'Al final del día, ¿te sentiste con energía?', opts: ['Sí, claramente','Sí, algo','Poco','Nada'] },
+        ]
+      },
+      {
+        key: 'soledad', name: 'Soledad', unlocks: 'depresion',
+        questions: [
+          { t: '¿Qué tan acompañado te sentiste esta semana?', opts: ['Muy acompañado','Algo acompañado','Poco','Nada'] },
+          { t: '¿Con cuánta facilidad pides apoyo?', opts: ['Muy fácil','Fácil','Difícil','Muy difícil'] },
+          { t: '¿Con qué frecuencia te sentiste aislado/a?', opts: ['Nunca','Rara vez','A veces','A menudo'] },
+        ]
+      },
+      {
+        key: 'depresion', name: 'Depresión', unlocks: 'ansiedad',
+        questions: [
+          { t: 'Pérdida de interés o placer en actividades.', opts: ['Nada','Varios días','Más de la mitad','Casi todos los días'] },
+          { t: 'Bajo estado de ánimo o desánimo.', opts: ['Nada','Varios días','Más de la mitad','Casi todos los días'] },
+          { t: 'Cansancio o poca energía.', opts: ['Nada','Varios días','Más de la mitad','Casi todos los días'] },
+        ]
+      },
+      {
+        key: 'ansiedad', name: 'Ansiedad', unlocks: null,
+        questions: [
+          { t: 'Preocupación excesiva difícil de controlar.', opts: ['Nada','Varios días','Más de la mitad','Casi todos los días'] },
+          { t: 'Sensación de nervios o inquietud.', opts: ['Nada','Varios días','Más de la mitad','Casi todos los días'] },
+          { t: 'Dificultad para relajarte.', opts: ['Nada','Varios días','Más de la mitad','Casi todos los días'] },
+        ]
+      },
+    ];
+
+    const STORAGE_KEY = 'mh_flow_progress_v1';
+    const state = loadState();
+
+    function loadState(){
+      const s = localStorage.getItem(STORAGE_KEY);
+      if(s){ try { return JSON.parse(s) } catch { /* ignore */ } }
+      // Estado inicial: solo Estrés desbloqueado
+      return {
+        completed: {}, // { key: {score, ts} }
+        unlocked: { estres: true },
+      };
+    }
+    function saveState(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+
+    // --- Utilidades UI ---
+    const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
+    const $ = (sel, ctx=document) => ctx.querySelector(sel);
+
+    function toast(msg){
+      const el = $('#toast');
+      el.textContent = msg; el.classList.add('show');
+      setTimeout(()=> el.classList.remove('show'), 2200);
+    }
+
+    function updateProgress(){
+      const done = Object.keys(state.completed).length;
+      $('#progressText').textContent = `${done} / ${LEVELS.length} completados`;
+      $('#progressBar').style.width = `${(done/LEVELS.length)*100}%`;
+    }
+
+    function refreshCards(){
+      LEVELS.forEach(l => {
+        const card = document.querySelector(`.card[data-key="${l.key}"]`);
+        const isUnlocked = !!state.unlocked[l.key];
+        const isDone = !!state.completed[l.key];
+
+        card.classList.toggle('locked', !isUnlocked);
+        card.querySelector('.state').textContent = isUnlocked ? (isDone? 'Completado' : 'Disponible') : 'Bloqueado';
+        card.querySelector('.lock').textContent = isUnlocked ? (isDone ? '✅' : '🔓') : '🔒';
+
+        const openBtn = card.querySelector('.open');
+        openBtn.disabled = !isUnlocked || isDone; // no re-abrir si ya está hecho
+        openBtn.textContent = isDone ? 'Hecho' : 'Responder';
+
+        const viewBtn = card.querySelector('.view');
+        viewBtn.disabled = !isDone;
+        if(isDone){ viewBtn.onclick = () => showResult(l.key); }
+      });
+      updateProgress();
+    }
+
+    function showResult(key){
+      const l = LEVELS.find(x=>x.key===key);
+      const r = state.completed[key];
+      if(!r) return;
+      const level = scoreLevel(r.score);
+      toast(`${l.name}: ${level.label} (puntaje ${r.score})`);
+    }
+
+    function scoreLevel(score){
+      if(score <= 3) return {label:'Bajo', color:'var(--accent)'};
+      if(score <= 6) return {label:'Moderado', color:'var(--warning)'};
+      return {label:'Alto', color:'var(--danger)'};
+    }
+
+    function openQuiz(level){
+      const dlg = $('#quizModal');
+      $('#quizTitle').textContent = `${level.name} — Cuestionario`;
+      const form = $('#quizForm');
+      form.innerHTML = '';
+
+      level.questions.forEach((q, qi)=>{
+        const fs = document.createElement('fieldset');
+        fs.className = 'q';
+        const lg = document.createElement('legend');
+        lg.textContent = q.t; fs.appendChild(lg);
+        q.opts.forEach((opt, oi)=>{
+          const id = `${level.key}-${qi}-${oi}`;
+          const lbl = document.createElement('label');
+          const input = document.createElement('input');
+          input.type = 'radio'; input.name = `q${qi}`; input.value = oi; input.id = id; input.required = true;
+          lbl.appendChild(input);
+          const span = document.createElement('span'); span.textContent = ' ' + opt;
+          lbl.appendChild(span);
+          fs.appendChild(lbl);
+        });
+        form.appendChild(fs);
+      });
+
+      $('#scoreHint').textContent = '';
+      dlg.showModal();
+
+      // escucha de cambios para mostrar pista de puntaje
+      form.oninput = () => {
+        const val = $$('input[type=radio]:checked', form).reduce((a,el)=>a+Number(el.value),0);
+        const levelInfo = scoreLevel(val);
+        $('#scoreHint').textContent = `Puntaje actual: ${val} — ${levelInfo.label}`;
+        $('#scoreHint').style.color = levelInfo.color;
+      };
+
+      $('#submitQuiz').onclick = (e)=>{
+        e.preventDefault();
+        if(!form.reportValidity()) return;
+        const score = $$('input[type=radio]:checked', form).reduce((a,el)=>a+Number(el.value),0);
+        completeLevel(level, score);
+        dlg.close();
+      };
+
+      $('#closeModal').onclick = ()=> dlg.close();
+    }
+
+    function completeLevel(level, score){
+      state.completed[level.key] = { score, ts: Date.now() };
+      // desbloquear siguiente si existe
+      if(level.unlocks){ state.unlocked[level.unlocks] = true; }
+      saveState();
+      refreshCards();
+      confettiBurst();
+      const lvl = scoreLevel(score);
+      toast(`${level.name} completado — ${lvl.label} (puntaje ${score})`);
+    }
+
+    // --- Confetti minimal canvas ---
+    function confettiBurst(){
+      const c = document.getElementById('confetti');
+      const ctx = c.getContext('2d');
+      c.width = innerWidth; c.height = innerHeight;
+      const N = 120; const parts = Array.from({length:N},()=>({
+        x: Math.random()*c.width,
+        y: -10, r: 2+Math.random()*4, vx: -2+Math.random()*4, vy: 2+Math.random()*3, life: 60+Math.random()*50
+      }));
+      let t = 0;
+      function step(){
+        ctx.clearRect(0,0,c.width,c.height);
+        parts.forEach(p=>{
+          p.x += p.vx; p.y += p.vy; p.vy+=0.05; p.life-=1;
+          ctx.globalAlpha = Math.max(p.life/110,0);
+          ctx.fillStyle = ['#60a5fa','#34d399','#fbbf24','#f472b6'][p.y % 4 | 0];
+          ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+        });
+        t++; if(t<110) requestAnimationFrame(step); else { ctx.clearRect(0,0,c.width,c.height); }
+      }
+      step();
+    }
+
+    // --- Eventos globales ---
+    function wire(){
+      // Abrir cuestionarios
+      $$('.card .open').forEach(btn=>{
+        btn.onclick = () => {
+          const key = btn.closest('.card').dataset.key;
+          const level = LEVELS.find(x=>x.key===key);
+          if(!state.unlocked[key] || state.completed[key]) return;
+          openQuiz(level);
+        };
+      });
+
+      // Reiniciar
+      $('#reset').onclick = () => {
+        localStorage.removeItem(STORAGE_KEY);
+        Object.assign(state, { completed:{}, unlocked:{ estres:true } });
+        saveState();
+        refreshCards();
+        toast('Progreso reiniciado');
+      };
+
+      refreshCards();
+    }
+
+    wire();
+  </script>
+
+  <!-- Nota ética/seguridad -->
+  <noscript>Este modo requiere JavaScript para funcionar.</noscript>
+  <footer>
+      <p><strong><center>&copy; 2025 Mentana🧠.</center></strong></p>
     </footer>
-  </div>
-  <script src="script_index.js"></script>
 </body>
 </html>
