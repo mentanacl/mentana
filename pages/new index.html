@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mentana</title>
+  <link rel="stylesheet" href="../style_index.css" />
+  <style>
+    :root{
+      --card:#111827;
+      --muted:#d4e0e4;
+      --text:#e5e7eb;
+      --accent:#56dbc4;
+      --accent-2:#f999b7;
+      --warning:#fbbf24;
+      --danger:#ef4444;
+      --lock:#64748b;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Noto Sans',sans-serif;   
+      background: linear-gradient(to right, #23bcd7, #112244);
+      color:var(--text);
+      min-height:100dvh;
+    }
+    header{
+      padding:24px 20px 8px;
+      max-width:1000px;
+      margin:0 auto;
+    }
+    .title{font-size:clamp(20px,2.6vw,34px); font-weight:800; letter-spacing:.3px;}
+    .subtitle{color:var(--muted); margin-top:6px}
+
+    .btn{
+      border:none; padding:10px 14px; border-radius:16px;
+      background:#56dbc4; color:var(--text); cursor:pointer;
+    }
+    .btn:hover{filter:brightness(1.15)}
+    .btn.secondary{background:#112244}
+
+    main{
+      max-width:1000px;
+      margin:20px auto 80px;
+      padding:0 20px;
+    }
+
+    /* Centrado de la tarjeta */
+    .grid{
+      display: grid;
+      place-items: center; /* Centra vertical y horizontal */
+      min-height: 80vh;    /* Espacio vertical */
+    }
+    .card{
+      max-width: 400px; /* Controla el ancho */
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius:18px;
+      padding:16px;
+      position:relative;
+      overflow:hidden;
+    }
+    .card h3{margin:0 0 6px; font-size:18px}
+    .pill{
+      display:inline-flex; align-items:center; gap:6px;
+      font-size:12px; padding:6px 10px; border-radius:999px;
+      border:1px solid #d4e0e4; color:var(--muted)
+    }
+    .locked .pill{color:#cbd5e1; border-color:#d4e0e4}
+    .status{position:absolute; top:14px; right:14px; font-size:12px; color:var(--muted)}
+    .actions{display:flex; gap:8px; margin-top:12px}
+    .action{
+      padding:10px 12px; border-radius:16px; border:0;
+      background:#56dbc4; color:var(--text); cursor:pointer
+    }
+    .action:disabled{opacity:.5; cursor:not-allowed}
+    .lock{display:inline-flex; width:16px; height:16px; align-items:center; justify-content:center; color:var(--lock)}
+
+    dialog{
+      width:min(720px, 92vw);
+      border:0; border-radius:16px; padding:0;
+      background: linear-gradient(to right, #23bcd7, #112244);
+      color:var(--text)
+    }
+    dialog::backdrop{background:rgba(0,0,0,.6)}
+    .modal-header{display:flex; justify-content:space-between; align-items:center; padding:16px}
+    .modal-body{padding:16px; max-height:65dvh; overflow:auto}
+    .q{margin-bottom:16px; padding:12px; background: rgba(255, 255, 255, 0.1); border-radius:12px}
+    .q legend{font-weight:600; margin-bottom:8px; font-size: 1rem;}
+    .q label{display:block; margin:6px 0;font-size: 0.9rem;}
+    .modal-footer{display:flex; gap:8px; justify-content:flex-end; padding:16px}
+
+    .badge{padding:4px 8px; border-radius:999px; background:#112244; color:#d4e0e4; font-size:12px}
+
+    .toast{
+      position:fixed; bottom:20px; left:50%;
+      transform:translateX(-50%);
+      background:#112244; color:var(--text);
+      border:1px solid #1f2937; padding:10px 14px;
+      border-radius:12px; opacity:0; pointer-events:none
+    }
+    .toast.show{opacity:1; animation:fade 2.2s ease forwards}
+    @keyframes fade{
+      0%{opacity:0; transform:translate(-50%,20px)}
+      10%{opacity:1; transform:translate(-50%,0)}
+      90%{opacity:1}
+      100%{opacity:0; transform:translate(-50%,-10px)}
+    }
+    .confetti{position:fixed; inset:0; pointer-events:none}
+	
+  </style>
+</head>
+<body>
+  <main>
+    <div class="contenedor-principal-adaptado">
+    <div class="seccion-logo">
+      <img src="logo.png" alt="Logo Mentana" />
+    </div>
+    <h2>Descubre tu<br>Perfil Emocional Preliminar</h2>
+    <div class="tarjeta-contenido-principal">
+      <div class="carousel-container">
+        <div class="carousel-cards" id="carrusel-principal">
+          <div class="card"><h3>Datos importantes</h3><p>7 de cada 10 personas en Chile declaran haber tenido alguna enfermedad o problema psicológico.</p></div>
+          <div class="card"><h3>Datos importantes</h3><p>El 47% de las personas que necesitó ver a un profesional del área no lo hizo por falta de financiamiento.</p></div>
+          <div class="card"><h3>Datos importantes</h3><p>El 17.5% de las mujeres ha sufrido algún trastorno de ansiedad en su vida, frente al 9.5% de los hombres.</p></div>
+          <div class="card"><h3>Datos importantes</h3><p>Un 75% de las personas entre 22 y 35 años reporta haber tenido alguna enfermedad o problema psicológico.</p></div>
+          <div class="card"><h3>Datos importantes</h3><p>El 58.3% de los trabajadores chilenos percibió algún tipo de estrés laboral.</p></div>
+          <div class="card"><h3>Datos importantes</h3><p>El 26.6% del rango de edad de 30 a 39 años percibe una mayor soledad.</p></div>
+          <div class="card"><h3>Datos importantes</h3><p>El 53.8% de las personas con problemas de insomnio evidenció síntomas moderados o severos de depresión.</p></div>
+        </div>
+      </div>
+      <div class="carousel-indicators" id="indicators-principal"></div>
+    </div>
+    <p>Estamos construyendo el futuro del bienestar emocional.<br><strong>Únete al viaje.</strong></p>
+    <div class="botones-accion">
+      <a href="pages/registro.html" class="btn btn-primary">Regístrate</a>
+      <a href="pages/login.html" class="btn btn-secondary">Inicia Sesión</a>
+    </div>
+    <div class="tarjeta-contenido-secundario">
+      <div class="carousel-container">
+        <div class="carousel-cards" id="carrusel-secundario">
+          <div class="card"><h3>Match Inteligente</h3><p>Conectamos a cada persona con el profesional ideal según sus síntomas, perfil y contexto personal.</p></div>
+          <div class="card"><h3>Atención 360°</h3><p>Presencia en todas las etapas: antes, durante y después del proceso terapéutico.</p></div>
+          <div class="card"><h3>Quiz Especializados</h3><p>Evaluaciones psicológicas basadas en criterios sociales, culturales, económicos y demográficos.</p></div>
+          <div class="card"><h3>Contenido Educativo</h3><p>Biblioteca de recursos para el aprendizaje continuo sobre bienestar mental y emocional.</p></div>
+          <div class="card"><h3>Seguimiento Continuo</h3><p>Seguimiento y soporte personalizado más allá de las sesiones clínicas.</p></div>
+          <div class="card"><h3>Acceso Ágil y Seguro</h3><p>Una experiencia rápida, confidencial y empática desde cualquier dispositivo.</p></div>
+        </div>
+      </div>
+      <div class="carousel-indicators" id="indicators-secundario"></div>
+    </div>
+
+  </div>
+      <footer>
+      <strong><br><center>&copy; 2025 Mentana&#x1F9E0;</center></strong>
+    </footer>
+  </main>
+
+  <dialog id="quizModal" aria-labelledby="quizTitle">
+    <div class="modal-header">
+      <strong id="quizTitle">Cuestionario</strong>
+      <button class="btn secondary" id="closeModal">Cerrar</button>
+    </div>
+    <form id="quizForm" class="modal-body">
+      <!-- Preguntas se inyectan dinámicamente -->
+    </form>
+    <div class="modal-footer">
+      <span id="scoreHint" class="subtitle" aria-live="polite"></span>
+      <button class="btn" id="submitQuiz">Enviar</button>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <canvas class="confetti" id="confetti" width="0" height="0"></canvas>
+  <noscript>Este modo requiere JavaScript para funcionar.</noscript>
+  <script src="../script_index.js"></script>
+</body>
+</html>

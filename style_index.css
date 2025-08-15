@@ -28,7 +28,7 @@ body {
 .contenedor-principal-adaptado {
   background: var(--main-bg-alpha);
   padding: 30px;
-  border-radius: 12px;
+  border-radius: 16px;
   width: 95%;
   max-width: 500px;
   backdrop-filter: blur(10px);
@@ -76,7 +76,7 @@ body {
   flex: 0 0 100%;
   background: var(--card-bg);
   padding: 20px;
-  border-radius: 8px;
+  border-radius:16px;
   scroll-snap-align: center;
 }
 
@@ -98,7 +98,7 @@ body {
 .indicator {
   width: 10px;
   height: 10px;
-  border-radius: 50%;
+  border-radius: 16px;
   background-color: rgba(255, 255, 255, 0.4);
   cursor: pointer;
 }
@@ -118,7 +118,7 @@ p {
 a.btn {
   display: inline-block;
   padding: 14px 28px;
-  border-radius: 30px;
+  border-radius: 16px;
   font-weight: 600;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -154,6 +154,6 @@ a.btn-secondary:hover {
   flex: 1;
   padding: 12px 0;
   font-size: 14px;
-  border-radius: 30px;
+  border-radius: 16px;
   text-align: center;
 }

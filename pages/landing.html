@@ -9,7 +9,7 @@
       --card:#111827;         /* gray-900 */
       --muted:#d4e0e4;        /* slate-400 */
       --text:#e5e7eb;         /* gray-200 */
-      --accent:#22c55e;       /* green-500 */
+      --accent:#56dbc4;       /* green-500 */
       --accent-2:#f999b7;     /* sky-400 */
       --warning:#fbbf24;      /* amber-400 */
       --danger:#ef4444;       /* red-500 */
@@ -31,25 +31,25 @@
     .topbar{display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-top:14px}
     .progress-wrap{flex:1; background: rgba(255, 255, 255, 0.1); border-radius:16px; padding:10px}
     .progress-label{display:flex; justify-content:space-between; font-size:12px; color:var(--muted); margin-bottom:6px}
-    .progress{height:10px; background: rgba(255, 255, 255, 0.1); border-radius:999px; overflow:hidden}
-    .progress>div{height:100%; width:0%; background:linear-gradient(90deg,var(--accent-2), var(--accent)); transition:width .5s ease}
-    .btn{border:none; padding:10px 14px; border-radius:12px; background:#1f2937; color:var(--text); cursor:pointer}
+    .progress{height:10px; background: rgba(255, 255, 255, 0.1); border-radius:16px; overflow:hidden}
+    .progress>div{height:100%; width:0%; background:linear-gradient(90deg,var(--accent-2), var(--accent)); transition:width .5s ease; border-radius:16px}
+    .btn{border:none; padding:10px 14px; border-radius:16px; background:#56dbc4; color:var(--text); cursor:pointer}
     .btn:hover{filter:brightness(1.15)}
     .btn.secondary{background:#112244}
 
     main{max-width:1000px; margin:20px auto 80px; padding:0 20px;}
     .grid{display:grid; gap:16px; grid-template-columns:repeat(12,1fr)}
     .card{grid-column:span 12; background: rgba(255, 255, 255, 0.1);;
-      border-radius:18px; padding:16px; position:relative; overflow:hidden}
+      border-radius:16px; padding:16px; position:relative; overflow:hidden}
     @media(min-width:720px){
       .card{grid-column:span 6}
     }
     .card h3{margin:0 0 6px; font-size:18px}
-    .pill{display:inline-flex; align-items:center; gap:6px; font-size:12px; padding:6px 10px; border-radius:999px; border:1px solid #d4e0e4; color:var(--muted)}
+    .pill{display:inline-flex; align-items:center; gap:6px; font-size:12px; padding:6px 10px; border-radius:16px; border:1px solid #d4e0e4; color:var(--muted)}
     .locked .pill{color:#cbd5e1; border-color:#d4e0e4}
     .status{position:absolute; top:14px; right:14px; font-size:12px; color:var(--muted)}
     .actions{display:flex; gap:8px; margin-top:12px}
-    .action{padding:10px 12px; border-radius:12px; border:0px solid #56dbc4; background:#56dbc4; color:var(--text); cursor:pointer}
+    .action{padding:10px 12px; border-radius:16px; border:0px solid #56dbc4; background:#56dbc4; color:var(--text); cursor:pointer}
     .action:disabled{opacity:.5; cursor:not-allowed}
 
     .lock{display:inline-flex; width:16px; height:16px; align-items:center; justify-content:center; color:var(--lock)}
@@ -59,17 +59,17 @@
     dialog::backdrop{background:rgba(0,0,0,.6)}
     .modal-header{display:flex; justify-content:space-between; align-items:center; padding:16px}
     .modal-body{padding:16px; max-height:65dvh; overflow:auto}
-    .q{margin-bottom:16px; padding:12px; background: rgba(255, 255, 255, 0.1);; border:0px solid #d4e0e4; border-radius:12px}
+    .q{margin-bottom:16px; padding:12px; background: rgba(255, 255, 255, 0.1);; border:0px solid #d4e0e4; border-radius:16px}
     .q legend{font-weight:600; margin-bottom:8px; font-size: 1rem;}
     .q label{display:block; margin:6px 0;font-size: 0.9rem;}
     .modal-footer{display:flex; gap:8px; justify-content:flex-end; padding:16px}
 
-    .tag{padding:4px 8px; border-radius:999px; background:#052d22; color:#a7f3d0; border:1px solid #064e3b; font-size:12px}
-    .badge{padding:4px 8px; border-radius:999px; background:#112244; border:0px solid #112244; color:#d4e0e4; font-size:12px}
+    .tag{padding:4px 8px; border-radius:16px; background:#052d22; color:#a7f3d0; border:1px solid #064e3b; font-size:12px}
+    .badge{padding:4px 8px; border-radius:16px; background:#112244; border:0px solid #112244; color:#d4e0e4; font-size:12px}
     .done{background:#052d22; color:#86efac; border-color:#14532d}
 
     /* Toast */
-    .toast{position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#112244; color:var(--text); border:1px solid #1f2937; padding:10px 14px; border-radius:12px; opacity:0; pointer-events:none}
+    .toast{position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#112244; color:var(--text); border:1px solid #1f2937; padding:10px 14px; border-radius:16px; opacity:0; pointer-events:none}
     .toast.show{opacity:1; animation:fade 2.2s ease forwards}
     @keyframes fade{0%{opacity:0; transform:translate(-50%,20px)} 10%{opacity:1; transform:translate(-50%,0)} 90%{opacity:1} 100%{opacity:0; transform:translate(-50%,-10px)}}
 
@@ -146,6 +146,9 @@
         </div>
       </article>
     </section>
+	<footer>
+      <p><strong><center><br>&copy; 2025 Mentana🧠.</center></strong></p>
+    </footer>
   </main>
 
   <!-- Modal de cuestionarios -->
@@ -159,8 +162,10 @@
     </form>
     <div class="modal-footer">
       <span id="scoreHint" class="subtitle" aria-live="polite"></span>
+	  
       <button class="btn" id="submitQuiz">Enviar</button>
     </div>
+	
   </dialog>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
@@ -296,12 +301,7 @@
       dlg.showModal();
 
       // escucha de cambios para mostrar pista de puntaje
-      form.oninput = () => {
-        const val = $$('input[type=radio]:checked', form).reduce((a,el)=>a+Number(el.value),0);
-        const levelInfo = scoreLevel(val);
-        $('#scoreHint').textContent = `Puntaje actual: ${val} — ${levelInfo.label}`;
-        $('#scoreHint').style.color = levelInfo.color;
-      };
+      
 
       $('#submitQuiz').onclick = (e)=>{
         e.preventDefault();
@@ -377,8 +377,6 @@
 
   <!-- Nota ética/seguridad -->
   <noscript>Este modo requiere JavaScript para funcionar.</noscript>
-  <footer>
-      <p><strong><center>&copy; 2025 Mentana🧠.</center></strong></p>
-    </footer>
+  
 </body>
 </html>
