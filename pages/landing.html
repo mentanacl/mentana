@@ -75,13 +75,30 @@
 
     /* Confetti minimal */
     .confetti{position:fixed; inset:0; pointer-events:none}
+	.card {
+  flex: 0 0 80%; /* cada tarjeta ocupa el 80% del ancho visible */
+  scroll-snap-align: start;
+}
+
+.grid {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 10px;
+}
+
+.card {
+  flex: 0 0 80%; /* cada tarjeta ocupa el 80% del ancho visible */
+  scroll-snap-align: start;
+}
   </style>
 </head>
 <body>
   <header>
   <article class="card">
   
-     <div align="center" class="title"><img src="../usuario.png" alt="Foto de Perfil" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid #4f46e5;"><br>Mi perfil emocional</div>
+     <div align="center" class="title"><img src="../usuario.png" alt="Foto de Perfil" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid #4f46e5;"><br>Perfil Emocional</div>
  
 
     <div class="topbar">
@@ -122,6 +139,39 @@
           <button class="action view" disabled>Ver resultado</button>
         </div>
       </article>
+	  <article class="card locked" data-key="soledad">
+        <div class="status"><span class="badge">Nivel 2</span></div>
+        <h3>Estrés</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
+        <p class="subtitle">Percepción de conexión y apoyo social.</p>
+        <div class="actions">
+          <button class="action open" disabled>Responder</button>
+          <button class="action view" disabled>Ver resultado</button>
+        </div>
+      </article>
+	  <article class="card locked" data-key="soledad">
+        <div class="status"><span class="badge">Nivel 3</span></div>
+        <h3>Estrés</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
+        <p class="subtitle">Percepción de conexión y apoyo social.</p>
+        <div class="actions">
+          <button class="action open" disabled>Responder</button>
+          <button class="action view" disabled>Ver resultado</button>
+        </div>
+      </article>
+	  <article class="card locked" data-key="soledad">
+        <div class="status"><span class="badge">Nivel 4</span></div>
+        <h3>Estrés</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
+        <p class="subtitle">Percepción de conexión y apoyo social.</p>
+        <div class="actions">
+          <button class="action open" disabled>Responder</button>
+          <button class="action view" disabled>Ver resultado</button>
+        </div>
+      </article>
+	  
+	  </section>
+	  <section class="grid" id="levels">
 
       <!-- 2. Soledad (bloqueado al inicio) -->
       <article class="card locked" data-key="soledad">
@@ -134,7 +184,38 @@
           <button class="action view" disabled>Ver resultado</button>
         </div>
       </article>
-
+	  <article class="card locked" data-key="soledad">
+        <div class="status"><span class="badge">Nivel 2</span></div>
+        <h3>Soledad</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
+        <p class="subtitle">Percepción de conexión y apoyo social.</p>
+        <div class="actions">
+          <button class="action open" disabled>Responder</button>
+          <button class="action view" disabled>Ver resultado</button>
+        </div>
+      </article>
+	  <article class="card locked" data-key="soledad">
+        <div class="status"><span class="badge">Nivel 3</span></div>
+        <h3>Soledad</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
+        <p class="subtitle">Percepción de conexión y apoyo social.</p>
+        <div class="actions">
+          <button class="action open" disabled>Responder</button>
+          <button class="action view" disabled>Ver resultado</button>
+        </div>
+      </article>
+	  <article class="card locked" data-key="soledad">
+        <div class="status"><span class="badge">Nivel 4</span></div>
+        <h3>Soledad</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
+        <p class="subtitle">Percepción de conexión y apoyo social.</p>
+        <div class="actions">
+          <button class="action open" disabled>Responder</button>
+          <button class="action view" disabled>Ver resultado</button>
+        </div>
+      </article>
+	  </section>
+<section class="grid" id="levels">
       <!-- 3. Depresión -->
       <article class="card locked" data-key="depresion">
         <div class="status"><span class="badge">Nivel 1</span></div>
@@ -146,7 +227,38 @@
           <button class="action view" disabled>Ver resultado</button>
         </div>
       </article>
-
+	  <article class="card locked" data-key="depresion">
+        <div class="status"><span class="badge">Nivel 2</span></div>
+        <h3>Depresión</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
+        <p class="subtitle">Estado de ánimo, interés y energía reciente.</p>
+        <div class="actions">
+          <button class="action open" disabled>Responder</button>
+          <button class="action view" disabled>Ver resultado</button>
+        </div>
+      </article>
+	  <article class="card locked" data-key="depresion">
+        <div class="status"><span class="badge">Nivel 3</span></div>
+        <h3>Depresión</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
+        <p class="subtitle">Estado de ánimo, interés y energía reciente.</p>
+        <div class="actions">
+          <button class="action open" disabled>Responder</button>
+          <button class="action view" disabled>Ver resultado</button>
+        </div>
+      </article>
+	  <article class="card locked" data-key="depresion">
+        <div class="status"><span class="badge">Nivel 4</span></div>
+        <h3>Depresión</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
+        <p class="subtitle">Estado de ánimo, interés y energía reciente.</p>
+        <div class="actions">
+          <button class="action open" disabled>Responder</button>
+          <button class="action view" disabled>Ver resultado</button>
+        </div>
+      </article>
+	  </section>
+<section class="grid" id="levels">
       <!-- 4. Ansiedad -->
       <article class="card locked" data-key="ansiedad">
         <div class="status"><span class="badge">Nivel 1</span></div>
@@ -158,9 +270,39 @@
           <button class="action view" disabled>Ver resultado</button>
         </div>
       </article>
+	  <article class="card locked" data-key="ansiedad">
+        <div class="status"><span class="badge">Nivel 2</span></div>
+        <h3>Ansiedad</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
+        <p class="subtitle">Preocupación, nerviosismo e inquietud.</p>
+        <div class="actions">
+          <button class="action open" disabled>Responder</button>
+          <button class="action view" disabled>Ver resultado</button>
+        </div>
+      </article>
+	  <article class="card locked" data-key="ansiedad">
+        <div class="status"><span class="badge">Nivel 3</span></div>
+        <h3>Ansiedad</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
+        <p class="subtitle">Preocupación, nerviosismo e inquietud.</p>
+        <div class="actions">
+          <button class="action open" disabled>Responder</button>
+          <button class="action view" disabled>Ver resultado</button>
+        </div>
+      </article>
+	  <article class="card locked" data-key="ansiedad">
+        <div class="status"><span class="badge">Nivel 4</span></div>
+        <h3>Ansiedad</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
+        <p class="subtitle">Preocupación, nerviosismo e inquietud.</p>
+        <div class="actions">
+          <button class="action open" disabled>Responder</button>
+          <button class="action view" disabled>Ver resultado</button>
+        </div>
+      </article>
     </section>
 	<footer>
-      <p><strong><center><br>&copy; 2025 Mentana🧠.</center></strong></p>
+      <p><strong><center><br>&copy; 2025 Mentana 🧠</center></strong></p>
     </footer>
   </main>
 
@@ -168,7 +310,7 @@
   <dialog id="quizModal" aria-labelledby="quizTitle">
     <div class="modal-header">
       <strong id="quizTitle">Cuestionario</strong>
-      <button class="btn secondary" id="closeModal">Cerrar</button>
+      <button class="btn secondary" id="closeModal">Salir</button>
     </div>
     <form id="quizForm" class="modal-body">
       <!-- Preguntas se inyectan dinámicamente -->
