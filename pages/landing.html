@@ -35,7 +35,7 @@
     .progress>div{height:100%; width:0%; background:linear-gradient(90deg,var(--accent-2), var(--accent)); transition:width .5s ease}
     .btn{border:none; padding:10px 14px; border-radius:12px; background:#1f2937; color:var(--text); cursor:pointer}
     .btn:hover{filter:brightness(1.15)}
-    .btn.secondary{background:#112244; border:1px solid #d4e0e4}
+    .btn.secondary{background:#112244}
 
     main{max-width:1000px; margin:20px auto 80px; padding:0 20px;}
     .grid{display:grid; gap:16px; grid-template-columns:repeat(12,1fr)}
@@ -55,17 +55,17 @@
     .lock{display:inline-flex; width:16px; height:16px; align-items:center; justify-content:center; color:var(--lock)}
 
     /* Panel flotante de cuestionario */
-    dialog{width:min(720px, 92vw); border:1px solid #d4e0e4; border-radius:16px; padding:0; background: linear-gradient(to right, #23bcd7, #112244); color:var(--text)}
+    dialog{width:min(720px, 92vw); border:0px solid #d4e0e4; border-radius:16px; padding:0; background: linear-gradient(to right, #23bcd7, #112244); color:var(--text)}
     dialog::backdrop{background:rgba(0,0,0,.6)}
-    .modal-header{display:flex; justify-content:space-between; align-items:center; padding:16px; border-bottom:1px solid #d4e0e4}
+    .modal-header{display:flex; justify-content:space-between; align-items:center; padding:16px}
     .modal-body{padding:16px; max-height:65dvh; overflow:auto}
-    .q{margin-bottom:16px; padding:12px; background: linear-gradient(to right, #23bcd7, #112244); border:1px solid #d4e0e4; border-radius:12px}
+    .q{margin-bottom:16px; padding:12px; background: rgba(255, 255, 255, 0.1);; border:0px solid #d4e0e4; border-radius:12px}
     .q legend{font-weight:600; margin-bottom:8px; font-size: 1rem;}
     .q label{display:block; margin:6px 0;font-size: 0.9rem;}
-    .modal-footer{display:flex; gap:8px; justify-content:flex-end; padding:16px; border-top:1px solid #d4e0e4}
+    .modal-footer{display:flex; gap:8px; justify-content:flex-end; padding:16px}
 
     .tag{padding:4px 8px; border-radius:999px; background:#052d22; color:#a7f3d0; border:1px solid #064e3b; font-size:12px}
-    .badge{padding:4px 8px; border-radius:999px; background:#0d1b2a; border:1px solid #1f2937; color:#f999b7; font-size:12px}
+    .badge{padding:4px 8px; border-radius:999px; background:#112244; border:0px solid #112244; color:#d4e0e4; font-size:12px}
     .done{background:#052d22; color:#86efac; border-color:#14532d}
 
     /* Toast */
@@ -79,7 +79,8 @@
 </head>
 <body>
   <header>
-    <div class="title">Perfil Emocional Preliminar</div>
+  
+    <div class="title"><img src="../logo.png" alt="Logo" width="35" height="35"> Perfil Emocional</div>
     <div class="subtitle">Desbloquea cada mundo completando su cuestionario. Guarda tu progreso automáticamente en este navegador.</div>
 
     <div class="topbar">
@@ -111,7 +112,7 @@
 
       <!-- 2. Soledad (bloqueado al inicio) -->
       <article class="card locked" data-key="soledad">
-        <div class="status"><span class="badge">Nivel 2</span></div>
+        <div class="status"><span class="badge">Nivel 1</span></div>
         <h3>Soledad</h3>
         <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
         <p class="subtitle">Percepción de conexión y apoyo social.</p>
@@ -123,7 +124,7 @@
 
       <!-- 3. Depresión -->
       <article class="card locked" data-key="depresion">
-        <div class="status"><span class="badge">Nivel 3</span></div>
+        <div class="status"><span class="badge">Nivel 1</span></div>
         <h3>Depresión</h3>
         <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
         <p class="subtitle">Estado de ánimo, interés y energía reciente.</p>
@@ -135,7 +136,7 @@
 
       <!-- 4. Ansiedad -->
       <article class="card locked" data-key="ansiedad">
-        <div class="status"><span class="badge">Nivel 4</span></div>
+        <div class="status"><span class="badge">Nivel 1</span></div>
         <h3>Ansiedad</h3>
         <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
         <p class="subtitle">Preocupación, nerviosismo e inquietud.</p>
