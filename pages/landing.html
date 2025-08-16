@@ -105,13 +105,13 @@
   gap: 25px;
   background: rgba(255, 255, 255, 0.1);;
   backdrop-filter: blur(10px);
-  border-radius: 40px;
+  border-radius: 16px;
   padding: 12px 28px;
   box-shadow: 0 8px 20px rgba(0,0,0,0.2);
 }
 
 .dock a {
-  font-size: 26px;
+  font-size: 24px;
   text-decoration: none;
   color: #111; /* azul oscuro si prefieres: #0b2545 */
   transition: transform 0.25s ease, color 0.3s;
@@ -131,7 +131,7 @@
  <div class="carousel-container">
         <div class="carousel-cards">
           <div class="card">
-		  <div align="center" class="title"><img src="../usuario.png" alt="Foto de Perfil" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid #4f46e5;"><br>Perfil Emocional</div>
+		  <div align="center" class="title"><img src="../usuario.png" alt="Foto de Perfil" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid #56dbc4;"><br>Perfil Emocional</div>
       <p align="center">Se recomienda implementar técnicas de relajación, mejorar la higiene del sueño y realizar actividad física moderada 3 veces por semana.</p></div>
           
         </div>
@@ -155,148 +155,16 @@
 	
   </header>
 
-  <main>
-    <section class="grid" id="levels">
-      <!-- Tarjetas de niveles -->
-      <!-- 1. Estrés -->
-      <article class="card" data-key="estres">
-        <div class="status"><span class="badge">Nivel 1</span></div>
-        <h3>Estrés 1</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔓</span> Estado: <b class="state">Disponible</b></span>
-        <p class="subtitle">Cuestionario breve sobre tensión, carga y recuperación.</p>
-        <div class="actions">
-          <button class="action open">Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  <article class="card locked" data-key="soledad">
-        <div class="status"><span class="badge">Nivel 2</span></div>
-        <h3>Estrés 2</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
-        <p class="subtitle">Percepción de conexión y apoyo social.</p>
-        <div class="actions">
-          <button class="action open" disabled>Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  <article class="card locked" data-key="soledad">
-        <div class="status"><span class="badge">Nivel 3</span></div>
-        <h3>Estrés 3</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
-        <p class="subtitle">Percepción de conexión y apoyo social.</p>
-        <div class="actions">
-          <button class="action open" disabled>Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  <article class="card locked" data-key="soledad">
-        <div class="status"><span class="badge">Nivel 4</span></div>
-        <h3>Estrés 4</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
-        <p class="subtitle">Percepción de conexión y apoyo social.</p>
-        <div class="actions">
-          <button class="action open" disabled>Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  
-	  </section>
-	  <section class="grid" id="levels">
-
-      <!-- 2. Soledad (bloqueado al inicio) -->
-      <article class="card locked" data-key="soledad">
-        <div class="status"><span class="badge">Nivel 1</span></div>
-        <h3>Soledad 1</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
-        <p class="subtitle">Percepción de conexión y apoyo social.</p>
-        <div class="actions">
-          <button class="action open" disabled>Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  <article class="card locked" data-key="soledad">
-        <div class="status"><span class="badge">Nivel 2</span></div>
-        <h3>Soledad 2</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
-        <p class="subtitle">Percepción de conexión y apoyo social.</p>
-        <div class="actions">
-          <button class="action open" disabled>Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  <article class="card locked" data-key="soledad">
-        <div class="status"><span class="badge">Nivel 3</span></div>
-        <h3>Soledad 3</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
-        <p class="subtitle">Percepción de conexión y apoyo social.</p>
-        <div class="actions">
-          <button class="action open" disabled>Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  <article class="card locked" data-key="soledad">
-        <div class="status"><span class="badge">Nivel 4</span></div>
-        <h3>Soledad 4</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
-        <p class="subtitle">Percepción de conexión y apoyo social.</p>
-        <div class="actions">
-          <button class="action open" disabled>Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  </section>
-	<section class="grid" id="levels">
-      <!-- 3. Depresión -->
-      <article class="card locked" data-key="depresion">
-        <div class="status"><span class="badge">Nivel 1</span></div>
-        <h3>Depresión 1</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
-        <p class="subtitle">Estado de ánimo, interés y energía reciente.</p>
-        <div class="actions">
-          <button class="action open" disabled>Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  <article class="card locked" data-key="depresion">
-        <div class="status"><span class="badge">Nivel 2</span></div>
-        <h3>Depresión 2</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
-        <p class="subtitle">Estado de ánimo, interés y energía reciente.</p>
-        <div class="actions">
-          <button class="action open" disabled>Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  <article class="card locked" data-key="depresion">
-        <div class="status"><span class="badge">Nivel 3</span></div>
-        <h3>Depresión 3</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
-        <p class="subtitle">Estado de ánimo, interés y energía reciente.</p>
-        <div class="actions">
-          <button class="action open" disabled>Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  <article class="card locked" data-key="depresion">
-        <div class="status"><span class="badge">Nivel 4</span></div>
-        <h3>Depresión 4</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
-        <p class="subtitle">Estado de ánimo, interés y energía reciente.</p>
-        <div class="actions">
-          <button class="action open" disabled>Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  </section>
-<section class="grid" id="levels">
+<main>
+  <section class="grid" id="levels">
       <!-- 4. Ansiedad -->
       <article class="card locked" data-key="ansiedad">
         <div class="status"><span class="badge">Nivel 1</span></div>
         <h3>Ansiedad 1</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
+       <span class="pill"><span class="lock" aria-hidden>🔓</span> Estado: <b class="state">Disponible</b></span>
         <p class="subtitle">Preocupación, nerviosismo e inquietud.</p>
         <div class="actions">
-          <button class="action open" disabled>Responder</button>
+          <button class="action open" >Responder</button>
           <button class="action view" disabled>Resultado</button>
         </div>
       </article>
@@ -331,12 +199,147 @@
         </div>
       </article>
     </section>
+		<section class="grid" id="levels">
+      <!-- 3. Depresión -->
+      <article class="card locked" data-key="depresion">
+        <div class="status"><span class="badge">Nivel 1</span></div>
+        <h3>Depresión 1</h3>
+       <span class="pill"><span class="lock" aria-hidden>🔓</span> Estado: <b class="state">Disponible</b></span>
+        <p class="subtitle">Estado de ánimo, interés y energía reciente.</p>
+        <div class="actions">
+          <button class="action open">Responder</button>
+          <button class="action view" disabled>Resultado</button>
+        </div>
+      </article>
+	  <article class="card locked" data-key="depresion">
+        <div class="status"><span class="badge">Nivel 2</span></div>
+        <h3>Depresión 2</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
+        <p class="subtitle">Estado de ánimo, interés y energía reciente.</p>
+        <div class="actions">
+          <button class="action open" disabled>Responder</button>
+          <button class="action view" disabled>Resultado</button>
+        </div>
+      </article>
+	  <article class="card locked" data-key="depresion">
+        <div class="status"><span class="badge">Nivel 3</span></div>
+        <h3>Depresión 3</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
+        <p class="subtitle">Estado de ánimo, interés y energía reciente.</p>
+        <div class="actions">
+          <button class="action open" disabled>Responder</button>
+          <button class="action view" disabled>Resultado</button>
+        </div>
+      </article>
+	  <article class="card locked" data-key="depresion">
+        <div class="status"><span class="badge">Nivel 4</span></div>
+        <h3>Depresión 4</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
+        <p class="subtitle">Estado de ánimo, interés y energía reciente.</p>
+        <div class="actions">
+          <button class="action open" disabled>Responder</button>
+          <button class="action view" disabled>Resultado</button>
+        </div>
+      </article>
+	  </section>
+    <section class="grid" id="levels">
+      <!-- Tarjetas de niveles -->
+      <!-- 1. Estres -->
+      <article class="card" data-key="estres">
+        <div class="status"><span class="badge">Nivel 1</span></div>
+        <h3>Estres 1</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔓</span> Estado: <b class="state">Disponible</b></span>
+        <p class="subtitle">Cuestionario breve sobre tensión, carga y recuperación.</p>
+        <div class="actions">
+          <button class="action open">Responder</button>
+          <button class="action view" disabled>Resultado</button>
+        </div>
+      </article>
+
+	  <article class="card locked" data-key="soledad">
+        <div class="status"><span class="badge">Nivel 2</span></div>
+        <h3>Estres 2</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
+        <p class="subtitle">Percepción de conexión y apoyo social.</p>
+        <div class="actions">
+          <button class="action open" disabled>Responder</button>
+          <button class="action view" disabled>Resultado</button>
+        </div>
+      </article>
+	  <article class="card locked" data-key="soledad">
+        <div class="status"><span class="badge">Nivel 3</span></div>
+        <h3>Estres 3</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
+        <p class="subtitle">Percepción de conexión y apoyo social.</p>
+        <div class="actions">
+          <button class="action open" disabled>Responder</button>
+          <button class="action view" disabled>Resultado</button>
+        </div>
+      </article>
+	  <article class="card locked" data-key="soledad">
+        <div class="status"><span class="badge">Nivel 4</span></div>
+        <h3>Estres 4</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
+        <p class="subtitle">Percepción de conexión y apoyo social.</p>
+        <div class="actions">
+          <button class="action open" disabled>Responder</button>
+          <button class="action view" disabled>Resultado</button>
+        </div>
+      </article>
+	  
+	  </section>
+	  <section class="grid" id="levels">
+
+      <!-- 2. Soledad (bloqueado al inicio) -->
+      <article class="card locked" data-key="soledad">
+        <div class="status"><span class="badge">Nivel 1</span></div>
+        <h3>Soledad 1</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔓</span> Estado: <b class="state">Disponible</b></span>
+        <p class="subtitle">Percepción de conexión y apoyo social.</p>
+        <div class="actions">
+          <button class="action open">Responder</button>
+          <button class="action view" disabled>Resultado</button>
+        </div>
+      </article>
+	  <article class="card locked" data-key="soledad">
+        <div class="status"><span class="badge">Nivel 2</span></div>
+        <h3>Soledad 2</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
+        <p class="subtitle">Percepción de conexión y apoyo social.</p>
+        <div class="actions">
+          <button class="action open" disabled>Responder</button>
+          <button class="action view" disabled>Resultado</button>
+        </div>
+      </article>
+	  <article class="card locked" data-key="soledad">
+        <div class="status"><span class="badge">Nivel 3</span></div>
+        <h3>Soledad 3</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
+        <p class="subtitle">Percepción de conexión y apoyo social.</p>
+        <div class="actions">
+          <button class="action open" disabled>Responder</button>
+          <button class="action view" disabled>Resultado</button>
+        </div>
+      </article>
+	  <article class="card locked" data-key="soledad">
+        <div class="status"><span class="badge">Nivel 4</span></div>
+        <h3>Soledad 4</h3>
+        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
+        <p class="subtitle">Percepción de conexión y apoyo social.</p>
+        <div class="actions">
+          <button class="action open" disabled>Responder</button>
+          <button class="action view" disabled>Resultado</button>
+        </div>
+      </article>
+	  </section>
+
+
 	<footer class="dock-footer">
   <nav class="dock">
-    <a href="#">🏠</a>
-    <a href="#">📊</a>
     <a href="#">👤</a>
-    <a href="#">ℹ️</a>
+	<a href="#">📊</a>
+	<a href="#">⚙️</a>
+    <a href="#">❌</a>
   </nav>
 </footer>
   </main>
@@ -363,55 +366,261 @@
 
   <script>
     // --- Datos de niveles y preguntas ---
-    const LEVELS = [ // --- Arreglo de preguntas ---
-      {
-        key: 'estres', name: 'Estrés', unlocks: 'soledad',
-        questions: [
-          { t: 'En los últimos 7 días, ¿qué tan tenso te has sentido?', opts: ['Nada','Un poco','Bastante','Mucho'] },
-          { t: '¿Con qué frecuencia hiciste pausas o descansos?', opts: ['Siempre','A menudo','A veces','Casi nunca'] },
-          { t: 'Al final del día, ¿te sentiste con energía?', opts: ['Sí, claramente','Sí, algo','Poco','Nada'] },
-        ]
-      },
-      {
-        key: 'soledad', name: 'Soledad', unlocks: 'depresion',
-        questions: [
-          { t: '¿Qué tan acompañado te sentiste esta semana?', opts: ['Muy acompañado','Algo acompañado','Poco','Nada'] },
-          { t: '¿Con cuánta facilidad pides apoyo?', opts: ['Muy fácil','Fácil','Difícil','Muy difícil'] },
-          { t: '¿Con qué frecuencia te sentiste aislado/a?', opts: ['Nunca','Rara vez','A veces','A menudo'] },
-        ]
-      },
-      {
-        key: 'depresion', name: 'Depresión', unlocks: 'ansiedad',
-        questions: [
-          { t: 'Pérdida de interés o placer en actividades.', opts: ['Nada','Varios días','Más de la mitad','Casi todos los días'] },
-          { t: 'Bajo estado de ánimo o desánimo.', opts: ['Nada','Varios días','Más de la mitad','Casi todos los días'] },
-          { t: 'Cansancio o poca energía.', opts: ['Nada','Varios días','Más de la mitad','Casi todos los días'] },
-        ]
-      },
-      {
-        key: 'ansiedad', name: 'Ansiedad', unlocks: null,
-        questions: [
-          { t: 'Preocupación excesiva difícil de controlar.', opts: ['Nada','Varios días','Más de la mitad','Casi todos los días'] },
-          { t: 'Sensación de nervios o inquietud.', opts: ['Nada','Varios días','Más de la mitad','Casi todos los días'] },
-          { t: 'Dificultad para relajarte.', opts: ['Nada','Varios días','Más de la mitad','Casi todos los días'] },
-        ]
-      },
+ const LEVELS = [{
+            key: 'estres-1',
+            name: 'Estres 1',
+            unlocks: 'estres-2',
+            questions: [{
+                    t: 'En los últimos 7 días, ¿qué tan tenso te has sentido?',
+                    opts: ['Nada', 'Un poco', 'Bastante', 'Mucho']
+                }, {
+                    t: '¿Con qué frecuencia hiciste pausas o descansos?',
+                    opts: ['Siempre', 'A menudo', 'A veces', 'Casi nunca']
+                }, {
+                    t: 'Al final del día, ¿te sentiste con energía?',
+                    opts: ['Sí, claramente', 'Sí, algo', 'Poco', 'Nada']
+                },
+            ]
+        }, {
+            key: 'soledad-1',
+            name: 'Soledad 1',
+            unlocks: 'soledad-2',
+            questions: [{
+                    t: '¿Qué tan acompañado te sentiste esta semana?',
+                    opts: ['Muy acompañado', 'Algo acompañado', 'Poco', 'Nada']
+                }, {
+                    t: '¿Con cuánta facilidad pides apoyo?',
+                    opts: ['Muy fácil', 'Fácil', 'Difícil', 'Muy difícil']
+                }, {
+                    t: '¿Con qué frecuencia te sentiste aislado/a?',
+                    opts: ['Nunca', 'Rara vez', 'A veces', 'A menudo']
+                },
+            ]
+        }, {
+            key: 'depresion-1',
+            name: 'Depresión 1',
+            unlocks: 'depresion-2',
+            questions: [{
+                    t: 'Pérdida de interés o placer en actividades.',
+                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
+                }, {
+                    t: 'Bajo estado de ánimo o desánimo.',
+                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
+                }, {
+                    t: 'Cansancio o poca energía.',
+                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
+                },
+            ]
+        }, {
+            key: 'ansiedad-1',
+            name: 'Ansiedad 1',
+            unlocks: 'ansiedad-2',
+            questions: [{
+                    t: 'Preocupación excesiva difícil de controlar.',
+                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
+                }, {
+                    t: 'Sensación de nervios o inquietud.',
+                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
+                }, {
+                    t: 'Dificultad para relajarte.',
+                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
+                },
+            ]
+        },
+        {
+            key: 'estres-2',
+            name: 'Estres 2',
+            unlocks: 'estres-3',
+            questions: [{
+                    t: 'En los últimos 7 días, ¿qué tan tenso te has sentido?',
+                    opts: ['Nada', 'Un poco', 'Bastante', 'Mucho']
+                }, {
+                    t: '¿Con qué frecuencia hiciste pausas o descansos?',
+                    opts: ['Siempre', 'A menudo', 'A veces', 'Casi nunca']
+                }, {
+                    t: 'Al final del día, ¿te sentiste con energía?',
+                    opts: ['Sí, claramente', 'Sí, algo', 'Poco', 'Nada']
+                },
+            ]
+        }, {
+            key: 'soledad-2',
+            name: 'Soledad 2',
+            unlocks: 'soledad-3',
+            questions: [{
+                    t: '¿Qué tan acompañado te sentiste esta semana?',
+                    opts: ['Muy acompañado', 'Algo acompañado', 'Poco', 'Nada']
+                }, {
+                    t: '¿Con cuánta facilidad pides apoyo?',
+                    opts: ['Muy fácil', 'Fácil', 'Difícil', 'Muy difícil']
+                }, {
+                    t: '¿Con qué frecuencia te sentiste aislado/a?',
+                    opts: ['Nunca', 'Rara vez', 'A veces', 'A menudo']
+                },
+            ]
+        }, {
+            key: 'depresion-2',
+            name: 'Depresión 2',
+            unlocks: 'depresion-3',
+            questions: [{
+                    t: 'Pérdida de interés o placer en actividades.',
+                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
+                }, {
+                    t: 'Bajo estado de ánimo o desánimo.',
+                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
+                }, {
+                    t: 'Cansancio o poca energía.',
+                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
+                },
+            ]
+        }, {
+            key: 'ansiedad-2',
+            name: 'Ansiedad 2',
+            unlocks: 'ansiedad-3',
+            questions: [{
+                    t: 'Preocupación excesiva difícil de controlar.',
+                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
+                }, {
+                    t: 'Sensación de nervios o inquietud.',
+                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
+                }, {
+                    t: 'Dificultad para relajarte.',
+                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
+                },
+            ]
+        },
+        {
+            key: 'estres-3',
+            name: 'Estres 3',
+            unlocks: 'estres-4',
+            questions: [{
+                    t: 'En los últimos 7 días, ¿qué tan tenso te has sentido?',
+                    opts: ['Nada', 'Un poco', 'Bastante', 'Mucho']
+                }, {
+                    t: '¿Con qué frecuencia hiciste pausas o descansos?',
+                    opts: ['Siempre', 'A menudo', 'A veces', 'Casi nunca']
+                }, {
+                    t: 'Al final del día, ¿te sentiste con energía?',
+                    opts: ['Sí, claramente', 'Sí, algo', 'Poco', 'Nada']
+                },
+            ]
+        }, {
+            key: 'soledad-3',
+            name: 'Soledad 3',
+            unlocks: 'soledad-4',
+            questions: [{
+                    t: '¿Qué tan acompañado te sentiste esta semana?',
+                    opts: ['Muy acompañado', 'Algo acompañado', 'Poco', 'Nada']
+                }, {
+                    t: '¿Con cuánta facilidad pides apoyo?',
+                    opts: ['Muy fácil', 'Fácil', 'Difícil', 'Muy difícil']
+                }, {
+                    t: '¿Con qué frecuencia te sentiste aislado/a?',
+                    opts: ['Nunca', 'Rara vez', 'A veces', 'A menudo']
+                },
+            ]
+        }, {
+            key: 'depresion-3',
+            name: 'Depresión 3',
+            unlocks: 'depresion-4',
+            questions: [{
+                    t: 'Pérdida de interés o placer en actividades.',
+                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
+                }, {
+                    t: 'Bajo estado de ánimo o desánimo.',
+                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
+                }, {
+                    t: 'Cansancio o poca energía.',
+                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
+                },
+            ]
+        }, {
+            key: 'ansiedad-3',
+            name: 'Ansiedad 3'
+        },
+        {
+            key: 'estres-4',
+            name: 'Estres 4',
+            unlocks: null,
+            questions: [{
+                    t: 'En los últimos 7 días, ¿qué tan tenso te has sentido?',
+                    opts: ['Nada', 'Un poco', 'Bastante', 'Mucho']
+                }, {
+                    t: '¿Con qué frecuencia hiciste pausas o descansos?',
+                    opts: ['Siempre', 'A menudo', 'A veces', 'Casi nunca']
+                }, {
+                    t: 'Al final del día, ¿te sentiste con energía?',
+                    opts: ['Sí, claramente', 'Sí, algo', 'Poco', 'Nada']
+                },
+            ]
+        },{
+            key: 'soledad-4',
+            name: 'Soledad 4',
+            unlocks: null,
+            questions: [{
+                    t: '¿Qué tan acompañado te sentiste esta semana?',
+                    opts: ['Muy acompañado', 'Algo acompañado', 'Poco', 'Nada']
+                }, {
+                    t: '¿Con cuánta facilidad pides apoyo?',
+                    opts: ['Muy fácil', 'Fácil', 'Difícil', 'Muy difícil']
+                }, {
+                    t: '¿Con qué frecuencia te sentiste aislado/a?',
+                    opts: ['Nunca', 'Rara vez', 'A veces', 'A menudo']
+                },
+            ]
+        }, {
+            key: 'depresion-4',
+            name: 'Depresión 4',
+            unlocks: null,
+            questions: [{
+                    t: 'Pérdida de interés o placer en actividades.',
+                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
+                }, {
+                    t: 'Bajo estado de ánimo o desánimo.',
+                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
+                }, {
+                    t: 'Cansancio o poca energía.',
+                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
+                },
+            ]
+        }, {
+            key: 'ansiedad-4',
+            name: 'Ansiedad',
+            unlocks: null,
+            questions: [{
+                    t: 'Preocupación excesiva difícil de controlar.',
+                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
+                }, {
+                    t: 'Sensación de nervios o inquietud.',
+                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
+                }, {
+                    t: 'Dificultad para relajarte.',
+                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
+                },
+            ]
+        },
     ];
+let completed = []; 
+let unlocked = ['estres-1','soledad-1','depresion-1','ansiedad-1']; // niveles iniciales desbloqueados
 
-    const STORAGE_KEY = 'mh_flow_progress_v1';
-    const state = loadState();
+const STORAGE_KEY = 'mh_flow_progress_v1';
+const state = loadState();
 
-    function loadState(){
-      const s = localStorage.getItem(STORAGE_KEY);
-      if(s){ try { return JSON.parse(s) } catch { /* ignore */ } }
-      // Estado inicial: solo Estrés desbloqueado
-      return {
-        completed: {}, // { key: {score, ts} }
-        unlocked: { estres: true },
-      };
-    }
-    function saveState(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+function loadState(){
+  const s = localStorage.getItem(STORAGE_KEY);
+  if(s){ try { return JSON.parse(s) } catch { /* ignore */ } }
+  // Estado inicial: todos los niveles 1 desbloqueados
+  return {
+    completed: {}, 
+    unlocked: { 
+      'estres-1': true,
+      'soledad-1': true,
+      'depresion-1': true,
+      'ansiedad-1': true
+    },
+  };
+}
 
+function saveState(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
     // --- Utilidades UI ---
     const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
     const $ = (sel, ctx=document) => ctx.querySelector(sel);
@@ -550,14 +759,22 @@
         };
       });
 
-      // Reiniciar
-      $('#reset').onclick = () => {
-        localStorage.removeItem(STORAGE_KEY);
-        Object.assign(state, { completed:{}, unlocked:{ estres:true } });
-        saveState();
-        refreshCards();
-        toast('Progreso reiniciado');
-      };
+     // --- Reiniciar ---
+$('#reset').onclick = () => {
+  localStorage.removeItem(STORAGE_KEY);
+  Object.assign(state, { 
+    completed:{}, 
+    unlocked:{ 
+      'estres-1': true,
+      'soledad-1': true,
+      'depresion-1': true,
+      'ansiedad-1': true
+    } 
+  });
+  saveState();
+  refreshCards();
+  toast('Progreso reiniciado');
+};
 
       refreshCards();
     }
