@@ -54,7 +54,7 @@
   flex-direction: column;
   gap: 20px;
   margin-bottom: 10px; /* separa tarjeta del footer */
-	  margin-top: 100px;    /* espacio desde arriba */
+	  margin-top: 20px;    /* espacio desde arriba */
 }
 
 .seccion-logo img {
