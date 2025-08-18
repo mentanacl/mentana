@@ -132,6 +132,21 @@ p, .subtitle {
 main {
   padding-bottom: 100px; /* deja espacio para el dock */
 }
+@media (min-width: 768px) { /* Ajusta el valor según tu definición de escritorio */
+    ::-webkit-scrollbar {
+        display: none;
+    }
+    /* O */
+    .hide-scroll {
+        overflow: hidden;
+    }
+    .viewport {
+        overflow: auto;
+        max-height: 100%;
+        margin-right: -100px;
+        padding-right: 100px;
+    }
+}
   </style>
 </head>
 <body>
