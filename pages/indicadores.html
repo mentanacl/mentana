@@ -9,6 +9,105 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="../style_index.css" />
+  <style>
+    :root{
+      --card:#111827;         /* gray-900 */
+      --muted:#d4e0e4;        /* slate-400 */
+      --text:#e5e7eb;         /* gray-200 */
+      --accent:#56dbc4;       /* green-500 */
+      --accent-2:#f999b7;     /* sky-400 */
+      --warning:#fbbf24;      /* amber-400 */
+      --danger:#ef4444;       /* red-500 */
+      --lock:#64748b;         /* slate-500 */
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Noto Sans',sans-serif;   
+      background: linear-gradient(to right, #23bcd7, #112244);
+      color:var(--text);
+      min-height:100dvh;
+    }
+    header{
+      padding:24px 20px 8px; max-width:1000px; margin:0 auto;
+    }
+    .title{font-size:clamp(20px,2.6vw,34px); font-weight:800; letter-spacing:.3px;}
+    .subtitle{color:var(--muted); margin-top:6px}
+
+    .topbar{display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-top:14px}
+    .progress-wrap{flex:1; background: rgba(255, 255, 255, 0.1); border-radius:16px; padding:10px}
+    .progress-label{display:flex; justify-content:space-between; font-size:12px; color:var(--muted); margin-bottom:6px}
+    .progress{height:10px; background: rgba(255, 255, 255, 0.1); border-radius:16px; overflow:hidden}
+    .progress>div{height:100%; width:0%; background:linear-gradient(90deg,var(--accent-2), var(--accent)); transition:width .5s ease; border-radius:16px}
+    .btn{border:none; padding:10px 14px; border-radius:16px; background:#56dbc4; color:var(--text); cursor:pointer}
+    .btn:hover{filter:brightness(1.15)}
+    .btn.secondary{background:#112244}
+
+    main{max-width:1000px; margin:20px auto 80px; padding:0 20px;}
+    .grid{display:grid; gap:16px; grid-template-columns:repeat(12,1fr)}
+    .card{grid-column:span 12; background: rgba(255, 255, 255, 0.1);;
+      border-radius:16px; padding:16px; position:relative; overflow:hidden}
+    @media(min-width:720px){
+      .card{grid-column:span 6}
+    }
+    .card h3{margin:0 0 6px; font-size:18px}
+    .pill{display:inline-flex; align-items:center; gap:6px; font-size:12px; padding:6px 10px; border-radius:16px; border:1px solid #d4e0e4; color:var(--muted)}
+    .locked .pill{color:#cbd5e1; border-color:#d4e0e4}
+    .status{position:absolute; top:14px; right:14px; font-size:12px; color:var(--muted)}
+    .actions{display:flex; gap:8px; margin-top:12px}
+    .action{padding:10px 12px; border-radius:16px; border:0px solid #56dbc4; background:#56dbc4; color:var(--text); cursor:pointer}
+    .action:disabled{opacity:.5; cursor:not-allowed}
+
+    .lock{display:inline-flex; width:16px; height:16px; align-items:center; justify-content:center; color:var(--lock)}
+
+   
+	.card {
+  flex: 0 0 80%; /* cada tarjeta ocupa el 80% del ancho visible */
+  scroll-snap-align: start;
+}
+
+.grid {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 10px;
+}
+
+.card {
+  flex: 0 0 100%; /* cada tarjeta ocupa el 80% del ancho visible */
+  scroll-snap-align: start;
+}
+.dock-footer {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+}
+
+.dock {
+  display: flex;
+  gap: 25px;
+  background: rgba(255, 255, 255, 0.1);;
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 12px 28px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.dock a {
+  font-size: 24px;
+  text-decoration: none;
+  color: #111; /* azul oscuro si prefieres: #0b2545 */
+  transition: transform 0.25s ease, color 0.3s;
+}
+
+.dock a:hover {
+  transform: scale(1.4);
+  color: #56dbc4;
+}
+
+  </style>
 </head>
 <body>
 
@@ -17,58 +116,63 @@
     <!-- Sección de perfil -->
     <div class="perfil-header" style="text-align:center; margin-bottom:20px;">
       
-      <img src="../usuario.png" alt="Foto de Perfil" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid #4f46e5;">
-      <h2>Juan Pérez</h2>
-      <p style="color:#ccc;">Perfil Emocional Preeliminar</p>
+       <article class="card">
+  
+        <div class="carousel-container">
+		  <div align="center" class="title"><img src="../usuario.png" alt="Foto de Perfil" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid #56dbc4;"><br>Perfil Emocional</div>
+      <p align="center">Se recomienda implementar técnicas de relajación, mejorar la higiene del sueño y realizar actividad física moderada 3 veces por semana.</p>
+          
+ 
+		
+      </div>
+
+    <div class="topbar">
+      <div class="progress-wrap" aria-label="Progreso total">
+        <div class="progress-label">
+          <span>Progreso</span>
+          <span id="progressText">0 / 4 completados</span>
+        </div>
+        <div class="progress"><div id="progressBar"></div></div>
+      </div>
+      <button id="reset" class="btn secondary" title="Reiniciar progreso">Reiniciar</button>
+    </div>
+	
+	
+	</article>
     
 <!-- Gráficos detallados -->
     <div class="tarjeta-contenido-principal">
       <div class="carousel-container">
-	  <div class="carousel-container">
+	 
         <div class="carousel-cards" id="carrusel-principal">
-          <div class="card">
-            <h3>Notas del profesional</h3>
-      <p style="color:#ccc;">Se recomienda implementar técnicas de relajación, mejorar la higiene del sueño y realizar actividad física moderada 3 veces por semana.</p></div>
-          <div class="card">
-            <h3>Notas del profesional</h3>
-      <p style="color:#ccc;">Se recomienda implementar técnicas de relajación, mejorar la higiene del sueño y realizar actividad física moderada 3 veces por semana.</p></div>
-          <div class="card">
-            <h3>Notas del profesional</h3>
-      <p style="color:#ccc;">Se recomienda implementar técnicas de relajación, mejorar la higiene del sueño y realizar actividad física moderada 3 veces por semana.</p></div>
-          <div class="card">
-            <h3>Notas del profesional</h3>
-      <p style="color:#ccc;">Se recomienda implementar técnicas de relajación, mejorar la higiene del sueño y realizar actividad física moderada 3 veces por semana.</p></div>
-        </div>
-		
-      </div>
-	  <div class="carousel-indicators" id="indicators-principal"></div>
-        <div class="carousel-cards" id="carrusel-secundario">
           <div class="card">
             <h3>Estrés</h3>
             <canvas id="chartEstres" height="150" width="0"></canvas>
           </div>
           <div class="card">
             <h3>Sueño</h3>
-            <canvas id="chartSueno" height="180"></canvas>
+            <canvas id="chartSueno" height="150"></canvas>
           </div>
           <div class="card">
             <h3>Fatiga</h3>
-            <canvas id="chartFatiga" height="180"></canvas>
+            <canvas id="chartFatiga" height="150"></canvas>
           </div>
         </div>
       </div>
-	  <div class="carousel-indicators" id="indicators-secundario"></div>
+	  <div class="carousel-indicators" id="indicators-principal"></div>
     </div>
 
     </div>
     
-    <!-- Footer -->
-    <footer>
-      <p><strong>&copy; 2025 Mentana 🧠<br>Todos los derechos reservados.</strong></p>
-    </footer>
-
+  
   </div>
-
+<footer class="dock-footer">
+  <nav class="dock">
+    <a href="landing.html">👤</a>
+	<a href="indicadores.html">📊</a>
+	<a href="#">⚙️</a>
+    <a href="../index.html">❌</a>
+  </nav>
   <!-- Scripts -->
   <script src="../script_index.js"></script>
   <script>

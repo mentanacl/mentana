@@ -156,189 +156,37 @@
   </header>
 
 <main>
-  <section class="grid" id="levels">
-      <!-- 4. Ansiedad -->
-      <article class="card locked" data-key="ansiedad1">
-        <div class="status"><span class="badge">Nivel 1</span></div>
-        <h3>Ansiedad 1</h3>
-       <span class="pill"><span class="lock" aria-hidden>🔓</span> Estado: <b class="state">Disponible</b></span>
-        <p class="subtitle">Preocupación, nerviosismo e inquietud.</p>
-        <div class="actions">
-          <button class="action open" >Responder</button>
-          <button class="action view" disabled>Resultado</button>
+  <div class="tarjeta-contenido-principal">
+      <div class="carousel-container">
+	  <div class="carousel-container">
+        		
+      </div>
+	  <div class="carousel-indicators" id="indicators-principal"></div>
+        <div class="carousel-cards" id="carrusel-secundario">
+          <div class="card">
+            <h3>Estrés</h3>
+            <canvas id="chartEstres" height="150" width="0"></canvas>
+          </div>
+          <div class="card">
+            <h3>Sueño</h3>
+            <canvas id="chartSueno" height="180"></canvas>
+          </div>
+          <div class="card">
+            <h3>Fatiga</h3>
+            <canvas id="chartFatiga" height="180"></canvas>
+          </div>
         </div>
-      </article>
-	  <article class="card locked" data-key="ansiedad2">
-        <div class="status"><span class="badge">Nivel 2</span></div>
-        <h3>Ansiedad 2</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
-        <p class="subtitle">Preocupación, nerviosismo e inquietud.</p>
-        <div class="actions">
-          <button class="action open" disabled>Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  <article class="card locked" data-key="ansiedad3">
-        <div class="status"><span class="badge">Nivel 3</span></div>
-        <h3>Ansiedad 3</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
-        <p class="subtitle">Preocupación, nerviosismo e inquietud.</p>
-        <div class="actions">
-          <button class="action open" disabled>Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  <article class="card locked" data-key="ansiedad4">
-        <div class="status"><span class="badge">Nivel 4</span></div>
-        <h3>Ansiedad 4</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
-        <p class="subtitle">Preocupación, nerviosismo e inquietud.</p>
-        <div class="actions">
-          <button class="action open" disabled>Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-    </section>
-		<section class="grid" id="levels">
-      <!-- 3. Depresión -->
-      <article class="card locked" data-key="depresion1">
-        <div class="status"><span class="badge">Nivel 1</span></div>
-        <h3>Depresión 1</h3>
-       <span class="pill"><span class="lock" aria-hidden>🔓</span> Estado: <b class="state">Disponible</b></span>
-        <p class="subtitle">Estado de ánimo, interés y energía reciente.</p>
-        <div class="actions">
-          <button class="action open">Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  <article class="card locked" data-key="depresion2">
-        <div class="status"><span class="badge">Nivel 2</span></div>
-        <h3>Depresión 2</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
-        <p class="subtitle">Estado de ánimo, interés y energía reciente.</p>
-        <div class="actions">
-          <button class="action open" disabled>Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  <article class="card locked" data-key="depresion3">
-        <div class="status"><span class="badge">Nivel 3</span></div>
-        <h3>Depresión 3</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
-        <p class="subtitle">Estado de ánimo, interés y energía reciente.</p>
-        <div class="actions">
-          <button class="action open" disabled>Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  <article class="card locked" data-key="depresion4">
-        <div class="status"><span class="badge">Nivel 4</span></div>
-        <h3>Depresión 4</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
-        <p class="subtitle">Estado de ánimo, interés y energía reciente.</p>
-        <div class="actions">
-          <button class="action open" disabled>Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  </section>
-    <section class="grid" id="levels">
-      <!-- Tarjetas de niveles -->
-      <!-- 1. Estres -->
-      <article class="card" data-key="estres1">
-        <div class="status"><span class="badge">Nivel 1</span></div>
-        <h3>Estres 1</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔓</span> Estado: <b class="state">Disponible</b></span>
-        <p class="subtitle">Cuestionario breve sobre tensión, carga y recuperación.</p>
-        <div class="actions">
-          <button class="action open">Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  <article class="card locked" data-key="estres2">
-        <div class="status"><span class="badge">Nivel 2</span></div>
-        <h3>Estres 2</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
-        <p class="subtitle">Cuestionario breve sobre tensión, carga y recuperación.</p>
-        <div class="actions">
-          <button class="action open" disabled>Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  <article class="card locked" data-key="estres3">
-        <div class="status"><span class="badge">Nivel 3</span></div>
-        <h3>Estres 3</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
-        <p class="subtitle">Cuestionario breve sobre tensión, carga y recuperación.</p>
-        <div class="actions">
-          <button class="action open" disabled>Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  <article class="card locked" data-key="estres4">
-        <div class="status"><span class="badge">Nivel 4</span></div>
-        <h3>Estres 4</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
-        <p class="subtitle">Cuestionario breve sobre tensión, carga y recuperación.</p>
-        <div class="actions">
-          <button class="action open" disabled>Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  
-	  </section>
-	  <section class="grid" id="levels">
-
-      <!-- 2. Soledad (bloqueado al inicio) -->
-      <article class="card locked" data-key="soledad1">
-        <div class="status"><span class="badge">Nivel 1</span></div>
-        <h3>Soledad 1</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔓</span> Estado: <b class="state">Disponible</b></span>
-        <p class="subtitle">Percepción de conexión y apoyo social.</p>
-        <div class="actions">
-          <button class="action open">Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  <article class="card locked" data-key="soledad2">
-        <div class="status"><span class="badge">Nivel 2</span></div>
-        <h3>Soledad 2</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
-        <p class="subtitle">Percepción de conexión y apoyo social.</p>
-        <div class="actions">
-          <button class="action open" disabled>Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  <article class="card locked" data-key="soledad3">
-        <div class="status"><span class="badge">Nivel 3</span></div>
-        <h3>Soledad 3</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
-        <p class="subtitle">Percepción de conexión y apoyo social.</p>
-        <div class="actions">
-          <button class="action open" disabled>Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  <article class="card locked" data-key="soledad4">
-        <div class="status"><span class="badge">Nivel 4</span></div>
-        <h3>Soledad 4</h3>
-        <span class="pill"><span class="lock" aria-hidden>🔒</span> Estado: <b class="state">Bloqueado</b></span>
-        <p class="subtitle">Percepción de conexión y apoyo social.</p>
-        <div class="actions">
-          <button class="action open" disabled>Responder</button>
-          <button class="action view" disabled>Resultado</button>
-        </div>
-      </article>
-	  </section>
+      </div>
+	  <div class="carousel-indicators" id="indicators-secundario"></div>
+    </div>
 
 
 	<footer class="dock-footer">
   <nav class="dock">
     <a href="landing.html">👤</a>
-	<a href="indicadores.html">📊</a>
+	<a href="newindex.html">📊</a>
 	<a href="#">⚙️</a>
-    <a href="../index.html">❌</a>
+    <a href="#">❌</a>
   </nav>
 </footer>
   </main>
@@ -362,8 +210,31 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <canvas class="confetti" id="confetti" width="0" height="0"></canvas>
-
+<script src="../script_index.js"></script>
   <script>
+  const baseConfig = (label, color) => ({
+      type: "bar",
+      data: {
+        labels: ["Muy Bajo", "Bajo", "Medio", "Alto", "Muy Alto"],
+        datasets: [{
+          label: label,
+          data: [5, 15, 40, 25, 15],
+          backgroundColor: color,
+          borderRadius: 8
+        }]
+      },
+      options: {
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { ticks: { color: "#ffffff" } },
+          y: { beginAtZero: true, ticks: { stepSize: 10, color: "#ffffff" } }
+        }
+      }
+    });
+
+    new Chart(document.getElementById("chartEstres"), baseConfig("Estrés", "#274f9e"));
+    new Chart(document.getElementById("chartSueno"), baseConfig("Sueño", "#274f9e"));
+    new Chart(document.getElementById("chartFatiga"), baseConfig("Fatiga", "#274f9e"));
     // --- Datos de niveles y preguntas ---
  const LEVELS = [{
             key: 'estres1',
