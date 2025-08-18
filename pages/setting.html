@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mentana</title>
+  
+  <style>
+    :root{
+      --card:#111827;         /* gray-900 */
+      --muted:#d4e0e4;        /* slate-400 */
+      --text:#e5e7eb;         /* gray-200 */
+      --accent:#56dbc4;       /* green-500 */
+      --accent-2:#f999b7;     /* sky-400 */
+      --warning:#fbbf24;      /* amber-400 */
+      --danger:#ef4444;       /* red-500 */
+      --lock:#64748b;         /* slate-500 */
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Noto Sans',sans-serif;   
+      background: linear-gradient(to right, #23bcd7, #112244);
+      color:var(--text);
+      min-height:100dvh;
+    }
+    header{
+      padding:24px 20px 8px; max-width:1000px; margin:0 auto;
+    }
+    .title{font-size:clamp(20px,2.6vw,34px); font-weight:800; letter-spacing:.3px;}
+    .subtitle{color:var(--muted); margin-top:6px}
+
+    .topbar{display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-top:14px}
+    .progress-wrap{flex:1; background: rgba(255, 255, 255, 0.1); border-radius:16px; padding:10px}
+    .progress-label{display:flex; justify-content:space-between; font-size:12px; color:var(--muted); margin-bottom:6px}
+    .progress{height:10px; background: rgba(255, 255, 255, 0.1); border-radius:16px; overflow:hidden}
+    .progress>div{height:100%; width:0%; background:linear-gradient(90deg,var(--accent-2), var(--accent)); transition:width .5s ease; border-radius:16px}
+    .btn{border:none; padding:10px 14px; border-radius:16px; background:#56dbc4; color:var(--text); cursor:pointer}
+    .btn:hover{filter:brightness(1.15)}
+    .btn.secondary{background:#112244}
+
+    main{max-width:1000px; margin:20px auto 80px; padding:0 20px;}
+    .grid{display:grid; gap:16px; grid-template-columns:repeat(12,1fr)}
+    .card{grid-column:span 12; background: rgba(255, 255, 255, 0.1);;
+      border-radius:16px; padding:16px; position:relative; overflow:hidden}
+    @media(min-width:720px){
+      .card{grid-column:span 6}
+    }
+    .card h3{margin:0 0 6px; font-size:18px}
+    .pill{display:inline-flex; align-items:center; gap:6px; font-size:12px; padding:6px 10px; border-radius:16px; border:1px solid #d4e0e4; color:var(--muted)}
+    .locked .pill{color:#cbd5e1; border-color:#d4e0e4}
+    .status{position:absolute; top:14px; right:14px; font-size:12px; color:var(--muted)}
+    .actions{display:flex; gap:8px; margin-top:12px}
+    .action{padding:10px 12px; border-radius:16px; border:0px solid #56dbc4; background:#56dbc4; color:var(--text); cursor:pointer}
+    .action:disabled{opacity:.5; cursor:not-allowed}
+
+    .lock{display:inline-flex; width:16px; height:16px; align-items:center; justify-content:center; color:var(--lock)}
+
+    /* Panel flotante de cuestionario */
+    dialog{width:min(720px, 92vw); border:0px solid #d4e0e4; border-radius:16px; padding:0; background: linear-gradient(to right, #23bcd7, #112244); color:var(--text)}
+    dialog::backdrop{background:rgba(0,0,0,.6)}
+    .modal-header{display:flex; justify-content:space-between; align-items:center; padding:16px}
+    .modal-body{padding:16px; max-height:65dvh; overflow:auto}
+    .q{margin-bottom:16px; padding:12px; background: rgba(255, 255, 255, 0.1);; border:0px solid #d4e0e4; border-radius:16px}
+    .q legend{font-weight:600; margin-bottom:8px; font-size: 1rem;}
+    .q label{display:block; margin:6px 0;font-size: 0.9rem;}
+    .modal-footer{display:flex; gap:8px; justify-content:flex-end; padding:16px}
+
+    .tag{padding:4px 8px; border-radius:16px; background:#052d22; color:#a7f3d0; border:1px solid #064e3b; font-size:12px}
+    .badge{padding:4px 8px; border-radius:16px; background:#112244; border:0px solid #112244; color:#d4e0e4; font-size:12px}
+    .done{background:#052d22; color:#86efac; border-color:#14532d}
+
+    /* Toast */
+    .toast{position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#112244; color:var(--text); border:1px solid #1f2937; padding:10px 14px; border-radius:16px; opacity:0; pointer-events:none}
+    .toast.show{opacity:1; animation:fade 2.2s ease forwards}
+    @keyframes fade{0%{opacity:0; transform:translate(-50%,20px)} 10%{opacity:1; transform:translate(-50%,0)} 90%{opacity:1} 100%{opacity:0; transform:translate(-50%,-10px)}}
+
+    /* Confetti minimal */
+    .confetti{position:fixed; inset:0; pointer-events:none}
+	
+
+.grid {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 10px;
+}
+
+.card {
+  flex: 0 0 80%; /* cada tarjeta ocupa el 80% del ancho visible */
+  scroll-snap-align: start;
+}
+.dock-footer {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+}
+
+.dock {
+  display: flex;
+  gap: 25px;
+  background: rgba(255, 255, 255, 0.1);;
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 12px 28px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.dock a {
+  font-size: 24px;
+  text-decoration: none;
+  color: #111; /* azul oscuro si prefieres: #0b2545 */
+  transition: transform 0.25s ease, color 0.3s;
+}
+
+.dock a:hover {
+  transform: scale(1.4);
+  color: #56dbc4;
+}
+.card, .q {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+p, .subtitle {
+  font-size: clamp(14px, 2.5vw, 16px);
+}
+.grid {
+  scroll-behavior: smooth;
+}
+main {
+  padding-bottom: 100px; /* deja espacio para el dock */
+}
+  </style>
+</head>
+<body>
+  <header>
+  <article class="card">
+  
+ <div class="carousel-container">
+        <div class="carousel-cards">
+          <div class="card">
+		  <div align="center" class="title"><img src="../logo.png" alt="Logo" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:0px solid #56dbc4;"></div>
+          <div class="container">
+<br><br>
+     <form method="post" action="" onsubmit="">
+     <div class="form-group">
+  <input type="email" id="email" name="email" placeholder="Email" required style="margin-bottom: 15px;">
+  <input type="password" id="password" name="password" placeholder="Contraseña" required>
+</div>
+      <div class="full-width">
+	  <a href="../pages/landing.html" class="btn btn-primary" style="width:180px; text-align:center; display:inline-block;">Inicia sesión</a>
+       </div>
+    </form>
+	<p>¿No tienes una cuenta? <a href="../pages/registro.html">Regístrate</a></p>
+  </div>
+        </div>
+		
+      </div>
+
+   
+	
+	</article>
+	
+	
+  </header>
+
+<main>
+  
+
+  </main>
+
+  <!-- Modal de cuestionarios -->
+  <dialog id="quizModal" aria-labelledby="quizTitle">
+    <div class="modal-header">
+      <strong id="quizTitle">Cuestionario</strong>
+      <button class="btn secondary" id="closeModal">Salir</button>
+    </div>
+    <form id="quizForm" class="modal-body">
+      <!-- Preguntas se inyectan dinámicamente -->
+    </form>
+    <div class="modal-footer">
+      <span id="scoreHint" class="subtitle" aria-live="polite"></span>
+	  
+      <button class="btn" id="submitQuiz">Enviar</button>
+    </div>
+	
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <canvas class="confetti" id="confetti" width="0" height="0"></canvas>
+
+ 
+
+ 
+</body>
+</html>
