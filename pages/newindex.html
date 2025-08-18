@@ -1,657 +1,198 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mentana</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Configuración de Usuario</title>
   <style>
-    :root{
-      --card:#111827;         /* gray-900 */
-      --muted:#d4e0e4;        /* slate-400 */
-      --text:#e5e7eb;         /* gray-200 */
-      --accent:#56dbc4;       /* green-500 */
-      --accent-2:#f999b7;     /* sky-400 */
-      --warning:#fbbf24;      /* amber-400 */
-      --danger:#ef4444;       /* red-500 */
-      --lock:#64748b;         /* slate-500 */
+    :root {
+      --card:#111827;
+      --muted:#d4e0e4;
+      --text:#e5e7eb;
+      --accent:#56dbc4;
+      --accent-2:#f999b7;
+      --lock:#64748b;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,'Noto Sans',sans-serif;   
+    body {
+      margin:0;
+      font-family:system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, sans-serif;
       background: linear-gradient(to right, #23bcd7, #112244);
       color:var(--text);
       min-height:100dvh;
+      display:flex;
+      flex-direction:column;
     }
-    header{
-      padding:24px 20px 8px; max-width:1000px; margin:0 auto;
+    header {
+      padding:24px 20px 8px;
+      max-width:1000px;
+      margin:0 auto;
     }
-    .title{font-size:clamp(20px,2.6vw,34px); font-weight:800; letter-spacing:.3px;}
-    .subtitle{color:var(--muted); margin-top:6px}
-
-    .topbar{display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-top:14px}
-    .progress-wrap{flex:1; background: rgba(255, 255, 255, 0.1); border-radius:16px; padding:10px}
-    .progress-label{display:flex; justify-content:space-between; font-size:12px; color:var(--muted); margin-bottom:6px}
-    .progress{height:10px; background: rgba(255, 255, 255, 0.1); border-radius:16px; overflow:hidden}
-    .progress>div{height:100%; width:0%; background:linear-gradient(90deg,var(--accent-2), var(--accent)); transition:width .5s ease; border-radius:16px}
-    .btn{border:none; padding:10px 14px; border-radius:16px; background:#56dbc4; color:var(--text); cursor:pointer}
-    .btn:hover{filter:brightness(1.15)}
-    .btn.secondary{background:#112244}
-
-    main{max-width:1000px; margin:20px auto 80px; padding:0 20px;}
-    .grid{display:grid; gap:16px; grid-template-columns:repeat(12,1fr)}
-    .card{grid-column:span 12; background: rgba(255, 255, 255, 0.1);;
-      border-radius:16px; padding:16px; position:relative; overflow:hidden}
-    @media(min-width:720px){
-      .card{grid-column:span 6}
+    .title {
+      font-size:clamp(20px,2.6vw,34px);
+      font-weight:800;
+      text-align:center;
     }
-    .card h3{margin:0 0 6px; font-size:18px}
-    .pill{display:inline-flex; align-items:center; gap:6px; font-size:12px; padding:6px 10px; border-radius:16px; border:1px solid #d4e0e4; color:var(--muted)}
-    .locked .pill{color:#cbd5e1; border-color:#d4e0e4}
-    .status{position:absolute; top:14px; right:14px; font-size:12px; color:var(--muted)}
-    .actions{display:flex; gap:8px; margin-top:12px}
-    .action{padding:10px 12px; border-radius:16px; border:0px solid #56dbc4; background:#56dbc4; color:var(--text); cursor:pointer}
-    .action:disabled{opacity:.5; cursor:not-allowed}
+    main {
+      flex:1;
+      width:100%;
+      max-width:800px;
+      margin:20px auto 80px;
+      padding:0 16px;
+      display:grid;
+      gap:20px;
+      box-sizing:border-box;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius:16px;
+      padding:20px;
+      width:100%;
+      box-sizing:border-box;
+    }
+    .card h3 {
+      margin-top:0;
+      margin-bottom:12px;
+      font-size:18px;
+    }
+    label {
+      display:block;
+      margin-bottom:6px;
+      font-weight:500;
+      font-size:14px;
+    }
+    input, select {
+      width:100%;
+      padding:12px;
+      margin-bottom:14px;
+      border-radius:12px;
+      border:1px solid #d4e0e4;
+      background:rgba(255,255,255,0.05);
+      color:var(--text);
+      font-size:15px;
+      box-sizing:border-box;
+    }
+    input[type="file"] {
+      border:none;
+      background:none;
+      padding:4px 0;
+    }
+    .btn {
+      border:none;
+      padding:14px 20px;
+      border-radius:16px;
+      background:var(--accent);
+      color:#111827;
+      font-weight:600;
+      cursor:pointer;
+      width:100%;
+    }
+    .btn:hover { filter:brightness(1.1); }
+    .toast {
+      position:fixed;
+      bottom:20px;
+      left:50%;
+      transform:translateX(-50%);
+      background:#112244;
+      color:var(--text);
+      border:1px solid #1f2937;
+      padding:10px 16px;
+      border-radius:16px;
+      opacity:0;
+      pointer-events:none;
+    }
+    .toast.show {
+      opacity:1;
+      animation:fade 2.2s ease forwards;
+    }
+    @keyframes fade {
+      0%{opacity:0; transform:translate(-50%,20px)}
+      10%{opacity:1; transform:translate(-50%,0)}
+      90%{opacity:1}
+      100%{opacity:0; transform:translate(-50%,-10px)}
+    }
+    footer.dock-footer {
+      position:fixed;
+      bottom:20px;
+      left:50%;
+      transform:translateX(-50%);
+      width:auto;
+    }
+    .dock {
+      display:flex;
+      gap:25px;
+      background:rgba(255,255,255,0.1);
+      backdrop-filter:blur(10px);
+      border-radius:16px;
+      padding:12px 28px;
+      box-shadow:0 8px 20px rgba(0,0,0,0.2);
+    }
+    .dock a {
+      font-size:24px;
+      text-decoration:none;
+      color:#111;
+      transition:transform 0.25s ease, color 0.3s;
+    }
+    .dock a:hover {
+      transform:scale(1.3);
+      color:var(--accent);
+    }
 
-    .lock{display:inline-flex; width:16px; height:16px; align-items:center; justify-content:center; color:var(--lock)}
-
-    /* Panel flotante de cuestionario */
-    dialog{width:min(720px, 92vw); border:0px solid #d4e0e4; border-radius:16px; padding:0; background: linear-gradient(to right, #23bcd7, #112244); color:var(--text)}
-    dialog::backdrop{background:rgba(0,0,0,.6)}
-    .modal-header{display:flex; justify-content:space-between; align-items:center; padding:16px}
-    .modal-body{padding:16px; max-height:65dvh; overflow:auto}
-    .q{margin-bottom:16px; padding:12px; background: rgba(255, 255, 255, 0.1);; border:0px solid #d4e0e4; border-radius:16px}
-    .q legend{font-weight:600; margin-bottom:8px; font-size: 1rem;}
-    .q label{display:block; margin:6px 0;font-size: 0.9rem;}
-    .modal-footer{display:flex; gap:8px; justify-content:flex-end; padding:16px}
-
-    .tag{padding:4px 8px; border-radius:16px; background:#052d22; color:#a7f3d0; border:1px solid #064e3b; font-size:12px}
-    .badge{padding:4px 8px; border-radius:16px; background:#112244; border:0px solid #112244; color:#d4e0e4; font-size:12px}
-    .done{background:#052d22; color:#86efac; border-color:#14532d}
-
-    /* Toast */
-    .toast{position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#112244; color:var(--text); border:1px solid #1f2937; padding:10px 14px; border-radius:16px; opacity:0; pointer-events:none}
-    .toast.show{opacity:1; animation:fade 2.2s ease forwards}
-    @keyframes fade{0%{opacity:0; transform:translate(-50%,20px)} 10%{opacity:1; transform:translate(-50%,0)} 90%{opacity:1} 100%{opacity:0; transform:translate(-50%,-10px)}}
-
-    /* Confetti minimal */
-    .confetti{position:fixed; inset:0; pointer-events:none}
-	.card {
-  flex: 0 0 80%; /* cada tarjeta ocupa el 80% del ancho visible */
-  scroll-snap-align: start;
-}
-
-.grid {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-bottom: 10px;
-}
-
-.card {
-  flex: 0 0 80%; /* cada tarjeta ocupa el 80% del ancho visible */
-  scroll-snap-align: start;
-}
-.dock-footer {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 50;
-}
-
-.dock {
-  display: flex;
-  gap: 25px;
-  background: rgba(255, 255, 255, 0.1);;
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  padding: 12px 28px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
-
-.dock a {
-  font-size: 24px;
-  text-decoration: none;
-  color: #111; /* azul oscuro si prefieres: #0b2545 */
-  transition: transform 0.25s ease, color 0.3s;
-}
-
-.dock a:hover {
-  transform: scale(1.4);
-  color: #56dbc4; /* 馃尶 Verde Menta */
-}
-
+    /* 📱 Mejoras en pantallas pequeñas */
+    @media (max-width:600px) {
+      header { padding:20px 12px 6px; }
+      main { padding:0 12px; }
+      .card { padding:16px; }
+      .btn { font-size:16px; padding:12px; }
+    }
   </style>
 </head>
 <body>
   <header>
-  <article class="card">
-  
- <div class="carousel-container">
-        <div class="carousel-cards">
-          <div class="card">
-		  <div align="center" class="title"><img src="../usuario.png" alt="Foto de Perfil" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid #56dbc4;"><br>Perfil Emocional</div>
-      <p align="center">Se recomienda implementar técnicas de relajación, mejorar la higiene del sueño y realizar actividad física moderada 3 veces por semana.</p></div>
-          
-        </div>
-		
-      </div>
-
-    <div class="topbar">
-      <div class="progress-wrap" aria-label="Progreso total">
-        <div class="progress-label">
-          <span>Progreso</span>
-          <span id="progressText">0 / 4 completados</span>
-        </div>
-        <div class="progress"><div id="progressBar"></div></div>
-      </div>
-      <button id="reset" class="btn secondary" title="Reiniciar progreso">Reiniciar</button>
-    </div>
-	
-	
-	</article>
-	
-	
+    <h1 class="title">⚙️ Configuración de Usuario</h1>
   </header>
 
-<main>
-  <div class="tarjeta-contenido-principal">
-      <div class="carousel-container">
-	  <div class="carousel-container">
-        		
-      </div>
-	  <div class="carousel-indicators" id="indicators-principal"></div>
-        <div class="carousel-cards" id="carrusel-secundario">
-          <div class="card">
-            <h3>Estrés</h3>
-            <canvas id="chartEstres" height="150" width="0"></canvas>
-          </div>
-          <div class="card">
-            <h3>Sueño</h3>
-            <canvas id="chartSueno" height="180"></canvas>
-          </div>
-          <div class="card">
-            <h3>Fatiga</h3>
-            <canvas id="chartFatiga" height="180"></canvas>
-          </div>
-        </div>
-      </div>
-	  <div class="carousel-indicators" id="indicators-secundario"></div>
-    </div>
+  <main>
+    <section class="card">
+      <h3>Perfil</h3>
+      <label for="foto">Foto de perfil</label>
+      <input type="file" id="foto" accept="image/*">
+      <label for="nombre">Nombre</label>
+      <input type="text" id="nombre" placeholder="Tu nombre">
+      <label for="email">Correo electrónico</label>
+      <input type="email" id="email" placeholder="ejemplo@correo.com">
+    </section>
 
 
-	<footer class="dock-footer">
-  <nav class="dock">
-    <a href="landing.html">👤</a>
-	<a href="newindex.html">📊</a>
-	<a href="#">⚙️</a>
-    <a href="#">❌</a>
-  </nav>
-</footer>
+    <section class="card">
+      <h3>Seguridad</h3>
+      <label for="password">Nueva contraseña</label>
+      <input type="password" id="password" placeholder="********">
+      <label for="password2">Repetir contraseña</label>
+      <input type="password" id="password2" placeholder="********">
+    </section>
+
+    <section>
+      <button class="btn" id="guardar">Guardar cambios</button>
+    </section>
   </main>
 
-  <!-- Modal de cuestionarios -->
-  <dialog id="quizModal" aria-labelledby="quizTitle">
-    <div class="modal-header">
-      <strong id="quizTitle">Cuestionario</strong>
-      <button class="btn secondary" id="closeModal">Salir</button>
-    </div>
-    <form id="quizForm" class="modal-body">
-      <!-- Preguntas se inyectan dinámicamente -->
-    </form>
-    <div class="modal-footer">
-      <span id="scoreHint" class="subtitle" aria-live="polite"></span>
-	  
-      <button class="btn" id="submitQuiz">Enviar</button>
-    </div>
-	
-  </dialog>
+  <footer class="dock-footer">
+    <nav class="dock">
+      <a href="landing.html">👤</a>
+      <a href="indicadores.html">📊</a>
+      <a href="newindex.html">⚙️</a>
+      <a href="../index.html">❌</a>
+    </nav>
+  </footer>
 
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <canvas class="confetti" id="confetti" width="0" height="0"></canvas>
-<script src="../script_index.js"></script>
+  <div class="toast" id="toast">✅ Cambios guardados</div>
+
   <script>
-  const baseConfig = (label, color) => ({
-      type: "bar",
-      data: {
-        labels: ["Muy Bajo", "Bajo", "Medio", "Alto", "Muy Alto"],
-        datasets: [{
-          label: label,
-          data: [5, 15, 40, 25, 15],
-          backgroundColor: color,
-          borderRadius: 8
-        }]
-      },
-      options: {
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { ticks: { color: "#ffffff" } },
-          y: { beginAtZero: true, ticks: { stepSize: 10, color: "#ffffff" } }
-        }
-      }
+    const toast=document.getElementById("toast");
+    document.getElementById("guardar").addEventListener("click",()=>{
+      toast.classList.add("show");
+      setTimeout(()=>toast.classList.remove("show"),2200);
     });
-
-    new Chart(document.getElementById("chartEstres"), baseConfig("Estrés", "#274f9e"));
-    new Chart(document.getElementById("chartSueno"), baseConfig("Sueño", "#274f9e"));
-    new Chart(document.getElementById("chartFatiga"), baseConfig("Fatiga", "#274f9e"));
-    // --- Datos de niveles y preguntas ---
- const LEVELS = [{
-            key: 'estres1',
-            name: 'Estres1',
-            unlocks: 'estres2',
-            questions: [{
-                    t: 'En los últimos 7 días, ¿qué tan tenso te has sentido?',
-                    opts: ['Nada', 'Un poco', 'Bastante', 'Mucho']
-                }, {
-                    t: '¿Con qué frecuencia hiciste pausas o descansos?',
-                    opts: ['Siempre', 'A menudo', 'A veces', 'Casi nunca']
-                }, {
-                    t: 'Al final del día, ¿te sentiste con energía?',
-                    opts: ['Sí, claramente', 'Sí, algo', 'Poco', 'Nada']
-                },
-            ]
-        }, {
-            key: 'soledad1',
-            name: 'Soledad1',
-            unlocks: 'soledad2',
-            questions: [{
-                    t: '¿Qué tan acompañado te sentiste esta semana?',
-                    opts: ['Muy acompañado', 'Algo acompañado', 'Poco', 'Nada']
-                }, {
-                    t: '¿Con cuánta facilidad pides apoyo?',
-                    opts: ['Muy fácil', 'Fácil', 'Difícil', 'Muy difícil']
-                }, {
-                    t: '¿Con qué frecuencia te sentiste aislado/a?',
-                    opts: ['Nunca', 'Rara vez', 'A veces', 'A menudo']
-                },
-            ]
-        }, {
-            key: 'depresion1',
-            name: 'Depresión1',
-            unlocks: 'depresion2',
-            questions: [{
-                    t: 'Pérdida de interés o placer en actividades.',
-                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
-                }, {
-                    t: 'Bajo estado de ánimo o desánimo.',
-                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
-                }, {
-                    t: 'Cansancio o poca energía.',
-                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
-                },
-            ]
-        }, {
-            key: 'ansiedad1',
-            name: 'Ansiedad1',
-            unlocks: 'ansiedad2',
-            questions: [{
-                    t: 'Preocupación excesiva difícil de controlar.',
-                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
-                }, {
-                    t: 'Sensación de nervios o inquietud.',
-                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
-                }, {
-                    t: 'Dificultad para relajarte.',
-                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
-                },
-            ]
-        },
-        {
-            key: 'estres2',
-            name: 'Estres2',
-            unlocks: 'estres3',
-            questions: [{
-                    t: 'En los últimos 7 días, ¿qué tan tenso te has sentido?',
-                    opts: ['Nada', 'Un poco', 'Bastante', 'Mucho']
-                }, {
-                    t: '¿Con qué frecuencia hiciste pausas o descansos?',
-                    opts: ['Siempre', 'A menudo', 'A veces', 'Casi nunca']
-                }, {
-                    t: 'Al final del día, ¿te sentiste con energía?',
-                    opts: ['Sí, claramente', 'Sí, algo', 'Poco', 'Nada']
-                },
-            ]
-        }, {
-            key: 'soledad2',
-            name: 'Soledad2',
-            unlocks: 'soledad3',
-            questions: [{
-                    t: '¿Qué tan acompañado te sentiste esta semana?',
-                    opts: ['Muy acompañado', 'Algo acompañado', 'Poco', 'Nada']
-                }, {
-                    t: '¿Con cuánta facilidad pides apoyo?',
-                    opts: ['Muy fácil', 'Fácil', 'Difícil', 'Muy difícil']
-                }, {
-                    t: '¿Con qué frecuencia te sentiste aislado/a?',
-                    opts: ['Nunca', 'Rara vez', 'A veces', 'A menudo']
-                },
-            ]
-        }, {
-            key: 'depresion2',
-            name: 'Depresión2',
-            unlocks: 'depresion3',
-            questions: [{
-                    t: 'Pérdida de interés o placer en actividades.',
-                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
-                }, {
-                    t: 'Bajo estado de ánimo o desánimo.',
-                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
-                }, {
-                    t: 'Cansancio o poca energía.',
-                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
-                },
-            ]
-        }, {
-            key: 'ansiedad2',
-            name: 'Ansiedad2',
-            unlocks: 'ansiedad3',
-            questions: [{
-                    t: 'Preocupación excesiva difícil de controlar.',
-                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
-                }, {
-                    t: 'Sensación de nervios o inquietud.',
-                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
-                }, {
-                    t: 'Dificultad para relajarte.',
-                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
-                },
-            ]
-        },
-        {
-            key: 'estres3',
-            name: 'Estres3',
-            unlocks: 'estres4',
-            questions: [{
-                    t: 'En los últimos 7 días, ¿qué tan tenso te has sentido?',
-                    opts: ['Nada', 'Un poco', 'Bastante', 'Mucho']
-                }, {
-                    t: '¿Con qué frecuencia hiciste pausas o descansos?',
-                    opts: ['Siempre', 'A menudo', 'A veces', 'Casi nunca']
-                }, {
-                    t: 'Al final del día, ¿te sentiste con energía?',
-                    opts: ['Sí, claramente', 'Sí, algo', 'Poco', 'Nada']
-                },
-            ]
-        }, {
-            key: 'soledad3',
-            name: 'Soledad3',
-            unlocks: 'soledad4',
-            questions: [{
-                    t: '¿Qué tan acompañado te sentiste esta semana?',
-                    opts: ['Muy acompañado', 'Algo acompañado', 'Poco', 'Nada']
-                }, {
-                    t: '¿Con cuánta facilidad pides apoyo?',
-                    opts: ['Muy fácil', 'Fácil', 'Difícil', 'Muy difícil']
-                }, {
-                    t: '¿Con qué frecuencia te sentiste aislado/a?',
-                    opts: ['Nunca', 'Rara vez', 'A veces', 'A menudo']
-                },
-            ]
-        }, {
-            key: 'depresion3',
-            name: 'Depresión3',
-            unlocks: 'depresion4',
-            questions: [{
-                    t: 'Pérdida de interés o placer en actividades.',
-                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
-                }, {
-                    t: 'Bajo estado de ánimo o desánimo.',
-                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
-                }, {
-                    t: 'Cansancio o poca energía.',
-                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
-                },
-            ]
-        }, {
-            key: 'ansiedad3',
-            name: 'Ansiedad3'
-        },
-        {
-            key: 'estres4',
-            name: 'Estres4',
-            unlocks: null,
-            questions: [{
-                    t: 'En los últimos 7 días, ¿qué tan tenso te has sentido?',
-                    opts: ['Nada', 'Un poco', 'Bastante', 'Mucho']
-                }, {
-                    t: '¿Con qué frecuencia hiciste pausas o descansos?',
-                    opts: ['Siempre', 'A menudo', 'A veces', 'Casi nunca']
-                }, {
-                    t: 'Al final del día, ¿te sentiste con energía?',
-                    opts: ['Sí, claramente', 'Sí, algo', 'Poco', 'Nada']
-                },
-            ]
-        },{
-            key: 'soledad4',
-            name: 'Soledad4',
-            unlocks: null,
-            questions: [{
-                    t: '¿Qué tan acompañado te sentiste esta semana?',
-                    opts: ['Muy acompañado', 'Algo acompañado', 'Poco', 'Nada']
-                }, {
-                    t: '¿Con cuánta facilidad pides apoyo?',
-                    opts: ['Muy fácil', 'Fácil', 'Difícil', 'Muy difícil']
-                }, {
-                    t: '¿Con qué frecuencia te sentiste aislado/a?',
-                    opts: ['Nunca', 'Rara vez', 'A veces', 'A menudo']
-                },
-            ]
-        }, {
-            key: 'depresion4',
-            name: 'Depresión4',
-            unlocks: null,
-            questions: [{
-                    t: 'Pérdida de interés o placer en actividades.',
-                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
-                }, {
-                    t: 'Bajo estado de ánimo o desánimo.',
-                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
-                }, {
-                    t: 'Cansancio o poca energía.',
-                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
-                },
-            ]
-        }, {
-            key: 'ansiedad4',
-            name: 'Ansiedad4',
-            unlocks: null,
-            questions: [{
-                    t: 'Preocupación excesiva difícil de controlar.',
-                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
-                }, {
-                    t: 'Sensación de nervios o inquietud.',
-                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
-                }, {
-                    t: 'Dificultad para relajarte.',
-                    opts: ['Nada', 'Varios días', 'Más de la mitad', 'Casi todos los días']
-                },
-            ]
-        },
-    ];
-let completed = []; 
-let unlocked = ['estres1','soledad1','depresion1','ansiedad1']; // niveles iniciales desbloqueados
-
-const STORAGE_KEY = 'mh_flow_progress_v1';
-const state = loadState();
-
-function loadState(){
-  const s = localStorage.getItem(STORAGE_KEY);
-  if(s){ try { return JSON.parse(s) } catch { /* ignore */ } }
-  // Estado inicial: todos los niveles 1 desbloqueados
-  return {
-    completed: {}, 
-    unlocked: { 
-      'estres1': true,
-      'soledad1': true,
-      'depresion1': true,
-      'ansiedad1': true
-    },
-  };
-}
-
-function saveState(){ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
-    // --- Utilidades UI ---
-    const $$ = (sel, ctx=document) => Array.from(ctx.querySelectorAll(sel));
-    const $ = (sel, ctx=document) => ctx.querySelector(sel);
-
-    function toast(msg){
-      const el = $('#toast');
-      el.textContent = msg; el.classList.add('show');
-      setTimeout(()=> el.classList.remove('show'), 2200);
-    }
-
-    function updateProgress(){
-      const done = Object.keys(state.completed).length;
-      $('#progressText').textContent = `${done} / ${LEVELS.length} completados`;
-      $('#progressBar').style.width = `${(done/LEVELS.length)*100}%`;
-    }
-
-    function refreshCards(){
-      LEVELS.forEach(l => {
-        const card = document.querySelector(`.card[data-key="${l.key}"]`);
-        const isUnlocked = !!state.unlocked[l.key];
-        const isDone = !!state.completed[l.key];
-
-        card.classList.toggle('locked', !isUnlocked);
-        card.querySelector('.state').textContent = isUnlocked ? (isDone? 'Completado' : 'Disponible') : 'Bloqueado';
-        card.querySelector('.lock').textContent = isUnlocked ? (isDone ? '�? : '🔓') : '🔒';
-
-        const openBtn = card.querySelector('.open');
-        openBtn.disabled = !isUnlocked || isDone; // no re-abrir si ya está hecho
-        openBtn.textContent = isDone ? 'Hecho' : 'Responder';
-
-        const viewBtn = card.querySelector('.view');
-        viewBtn.disabled = !isDone;
-        if(isDone){ viewBtn.onclick = () => showResult(l.key); }
-      });
-      updateProgress();
-    }
-
-    function showResult(key){
-      const l = LEVELS.find(x=>x.key===key);
-      const r = state.completed[key];
-      if(!r) return;
-      const level = scoreLevel(r.score);
-      toast(`${l.name}: ${level.label} (puntaje ${r.score})`);
-    }
-
-    function scoreLevel(score){
-      if(score <= 3) return {label:'Bajo', color:'var(--accent)'};
-      if(score <= 6) return {label:'Moderado', color:'var(--warning)'};
-      return {label:'Alto', color:'var(--danger)'};
-    }
-
-    function openQuiz(level){
-      const dlg = $('#quizModal');
-      $('#quizTitle').textContent = `${level.name} Cuestionario`;
-      const form = $('#quizForm');
-      form.innerHTML = '';
-
-      level.questions.forEach((q, qi)=>{
-        const fs = document.createElement('fieldset');
-        fs.className = 'q';
-        const lg = document.createElement('legend');
-        lg.textContent = q.t; fs.appendChild(lg);
-        q.opts.forEach((opt, oi)=>{
-          const id = `${level.key}-${qi}-${oi}`;
-          const lbl = document.createElement('label');
-          const input = document.createElement('input');
-          input.type = 'radio'; input.name = `q${qi}`; input.value = oi; input.id = id; input.required = true;
-          lbl.appendChild(input);
-          const span = document.createElement('span'); span.textContent = ' ' + opt;
-          lbl.appendChild(span);
-          fs.appendChild(lbl);
-        });
-        form.appendChild(fs);
-      });
-
-      $('#scoreHint').textContent = '';
-      dlg.showModal();
-
-      // escucha de cambios para mostrar pista de puntaje
-      
-
-      $('#submitQuiz').onclick = (e)=>{
-        e.preventDefault();
-        if(!form.reportValidity()) return;
-        const score = $$('input[type=radio]:checked', form).reduce((a,el)=>a+Number(el.value),0);
-        completeLevel(level, score);
-        dlg.close();
-      };
-
-      $('#closeModal').onclick = ()=> dlg.close();
-    }
-
-    function completeLevel(level, score){
-      state.completed[level.key] = { score, ts: Date.now() };
-      // desbloquear siguiente si existe
-      if(level.unlocks){ state.unlocked[level.unlocks] = true; }
-      saveState();
-      refreshCards();
-      confettiBurst();
-      const lvl = scoreLevel(score);
-      toast(`${level.name} completado �?${lvl.label} (puntaje ${score})`);
-    }
-
-    // --- Confetti minimal canvas ---
-    function confettiBurst(){
-      const c = document.getElementById('confetti');
-      const ctx = c.getContext('2d');
-      c.width = innerWidth; c.height = innerHeight;
-      const N = 120; const parts = Array.from({length:N},()=>({
-        x: Math.random()*c.width,
-        y: -10, r: 2+Math.random()*4, vx: -2+Math.random()*4, vy: 2+Math.random()*3, life: 60+Math.random()*50
-      }));
-      let t = 0;
-      function step(){
-        ctx.clearRect(0,0,c.width,c.height);
-        parts.forEach(p=>{
-          p.x += p.vx; p.y += p.vy; p.vy+=0.05; p.life-=1;
-          ctx.globalAlpha = Math.max(p.life/110,0);
-          ctx.fillStyle = ['#60a5fa','#34d399','#fbbf24','#f472b6'][p.y % 4 | 0];
-          ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
-        });
-        t++; if(t<110) requestAnimationFrame(step); else { ctx.clearRect(0,0,c.width,c.height); }
-      }
-      step();
-    }
-
-    // --- Eventos globales ---
-    function wire(){
-      // Abrir cuestionarios
-      $$('.card .open').forEach(btn=>{
-        btn.onclick = () => {
-          const key = btn.closest('.card').dataset.key;
-          const level = LEVELS.find(x=>x.key===key);
-          if(!state.unlocked[key] || state.completed[key]) return;
-          openQuiz(level);
-        };
-      });
-
-     // --- Reiniciar ---
-$('#reset').onclick = () => {
-  localStorage.removeItem(STORAGE_KEY);
-  Object.assign(state, { 
-    completed:{}, 
-    unlocked:{ 
-      'estres1': true,
-      'soledad1': true,
-      'depresion1': true,
-      'ansiedad1': true
-    } 
-  });
-  saveState();
-  refreshCards();
-  toast('Progreso reiniciado');
-};
-
-      refreshCards();
-    }
-
-    wire();
   </script>
-
- 
 </body>
 </html>

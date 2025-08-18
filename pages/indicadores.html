@@ -3,12 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Perfil de Salud Mental</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="../style_index.css" />
+  <title>Mentana</title>
   <style>
     :root{
       --card:#111827;         /* gray-900 */
@@ -59,7 +54,27 @@
 
     .lock{display:inline-flex; width:16px; height:16px; align-items:center; justify-content:center; color:var(--lock)}
 
-   
+    /* Panel flotante de cuestionario */
+    dialog{width:min(720px, 92vw); border:0px solid #d4e0e4; border-radius:16px; padding:0; background: linear-gradient(to right, #23bcd7, #112244); color:var(--text)}
+    dialog::backdrop{background:rgba(0,0,0,.6)}
+    .modal-header{display:flex; justify-content:space-between; align-items:center; padding:16px}
+    .modal-body{padding:16px; max-height:65dvh; overflow:auto}
+    .q{margin-bottom:16px; padding:12px; background: rgba(255, 255, 255, 0.1);; border:0px solid #d4e0e4; border-radius:16px}
+    .q legend{font-weight:600; margin-bottom:8px; font-size: 1rem;}
+    .q label{display:block; margin:6px 0;font-size: 0.9rem;}
+    .modal-footer{display:flex; gap:8px; justify-content:flex-end; padding:16px}
+
+    .tag{padding:4px 8px; border-radius:16px; background:#052d22; color:#a7f3d0; border:1px solid #064e3b; font-size:12px}
+    .badge{padding:4px 8px; border-radius:16px; background:#112244; border:0px solid #112244; color:#d4e0e4; font-size:12px}
+    .done{background:#052d22; color:#86efac; border-color:#14532d}
+
+    /* Toast */
+    .toast{position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#112244; color:var(--text); border:1px solid #1f2937; padding:10px 14px; border-radius:16px; opacity:0; pointer-events:none}
+    .toast.show{opacity:1; animation:fade 2.2s ease forwards}
+    @keyframes fade{0%{opacity:0; transform:translate(-50%,20px)} 10%{opacity:1; transform:translate(-50%,0)} 90%{opacity:1} 100%{opacity:0; transform:translate(-50%,-10px)}}
+
+    /* Confetti minimal */
+    .confetti{position:fixed; inset:0; pointer-events:none}
 	.card {
   flex: 0 0 80%; /* cada tarjeta ocupa el 80% del ancho visible */
   scroll-snap-align: start;
@@ -74,7 +89,7 @@
 }
 
 .card {
-  flex: 0 0 100%; /* cada tarjeta ocupa el 80% del ancho visible */
+  flex: 0 0 80%; /* cada tarjeta ocupa el 80% del ancho visible */
   scroll-snap-align: start;
 }
 .dock-footer {
@@ -104,25 +119,22 @@
 
 .dock a:hover {
   transform: scale(1.4);
-  color: #56dbc4;
+  color: #56dbc4; /* 馃尶 Verde Menta */
 }
 
   </style>
 </head>
 <body>
-
-  <div class="contenedor-principal-adaptado">
-    
-    <!-- Sección de perfil -->
-    <div class="perfil-header" style="text-align:center; margin-bottom:20px;">
-      
-       <article class="card">
+  <header>
+  <article class="card">
   
-        <div class="carousel-container">
+ <div class="carousel-container">
+        <div class="carousel-cards">
+          <div class="card">
 		  <div align="center" class="title"><img src="../usuario.png" alt="Foto de Perfil" style="width:100px;height:100px;border-radius:50%;object-fit:cover;border:3px solid #56dbc4;"><br>Perfil Emocional</div>
-      <p align="center">Se recomienda implementar técnicas de relajación, mejorar la higiene del sueño y realizar actividad física moderada 3 veces por semana.</p>
+      <p align="center">Se recomienda implementar técnicas de relajación, mejorar la higiene del sueño y realizar actividad física moderada 3 veces por semana.</p></div>
           
- 
+        </div>
 		
       </div>
 
@@ -139,66 +151,139 @@
 	
 	
 	</article>
-    
-<!-- Gráficos detallados -->
-    <div class="tarjeta-contenido-principal">
-      <div class="carousel-container">
-	 
-        <div class="carousel-cards" id="carrusel-principal">
-          <div class="card">
-            <h3>Estrés</h3>
-            <canvas id="chartEstres" height="150" width="0"></canvas>
-          </div>
-          <div class="card">
-            <h3>Sueño</h3>
-            <canvas id="chartSueno" height="150"></canvas>
-          </div>
-          <div class="card">
-            <h3>Fatiga</h3>
-            <canvas id="chartFatiga" height="150"></canvas>
-          </div>
-        </div>
-      </div>
-	  <div class="carousel-indicators" id="indicators-principal"></div>
-    </div>
+	
+	
+  </header>
 
-    </div>
-    
-  
-  </div>
-<footer class="dock-footer">
+<main>
+  <section class="grid" id="levels">
+      <!-- 4. Ansiedad -->
+      <article class="card locked" data-key="ansiedad1">
+        <div class="status"><span class="badge">Nivel 1</span></div>
+        <h3>Gráfico 1</h3>
+       
+      </article>
+	  <article class="card locked" data-key="ansiedad2">
+        <div class="status"><span class="badge">Nivel 2</span></div>
+        <h3>Gráfico 2</h3>
+              </article>
+	  <article class="card locked" data-key="ansiedad3">
+        <div class="status"><span class="badge">Nivel 3</span></div>
+        <h3>Gráfico 3</h3>
+       
+        </div>
+      </article>
+	  <article class="card locked" data-key="ansiedad4">
+        <div class="status"><span class="badge">Nivel 4</span></div>
+        <h3>Gráfico 4</h3>
+       
+        </div>
+      </article>
+    </section>
+		<section class="grid" id="levels">
+      <!-- 3. Depresión -->
+      <article class="card locked" data-key="depresion1">
+        <div class="status"><span class="badge">Nivel 1</span></div>
+        <h3>Gráfico 1</h3>
+       
+      </article>
+	  <article class="card locked" data-key="depresion2">
+        <div class="status"><span class="badge">Nivel 2</span></div>
+        <h3>Gráfico 2</h3>
+        
+      </article>
+	  <article class="card locked" data-key="depresion3">
+        <div class="status"><span class="badge">Nivel 3</span></div>
+        <h3>Gráfico 3</h3>
+        
+      </article>
+	  <article class="card locked" data-key="depresion4">
+        <div class="status"><span class="badge">Nivel 4</span></div>
+        <h3>Gráfico 4</h3>
+        
+      </article>
+	  </section>
+    <section class="grid" id="levels">
+      <!-- Tarjetas de niveles -->
+      <!-- 1. Estres -->
+      <article class="card" data-key="estres1">
+        <div class="status"><span class="badge">Nivel 1</span></div>
+        <h3>Gráfico 1</h3>
+              </article>
+	  <article class="card locked" data-key="estres2">
+        <div class="status"><span class="badge">Nivel 2</span></div>
+        <h3>Gráfico 2</h3>
+        
+      </article>
+	  <article class="card locked" data-key="estres3">
+        <div class="status"><span class="badge">Nivel 3</span></div>
+        <h3>Gráfico 3</h3>
+        
+      </article>
+	  <article class="card locked" data-key="estres4">
+        <div class="status"><span class="badge">Nivel 4</span></div>
+        <h3>Gráfico 4</h3>
+       
+      </article>
+	  
+	  </section>
+	  <section class="grid" id="levels">
+
+      <!-- 2. Soledad (bloqueado al inicio) -->
+      <article class="card locked" data-key="soledad1">
+        <div class="status"><span class="badge">Nivel 1</span></div>
+        <h3>Gráfico 1</h3>
+       
+      </article>
+	  <article class="card locked" data-key="soledad2">
+        <div class="status"><span class="badge">Nivel 2</span></div>
+        <h3>Gráfico 2</h3>
+        
+      </article>
+	  <article class="card locked" data-key="soledad3">
+        <div class="status"><span class="badge">Nivel 3</span></div>
+        <h3>Gráfico 3</h3>
+        
+      </article>
+	  <article class="card locked" data-key="soledad4">
+        <div class="status"><span class="badge">Nivel 4</span></div>
+        <h3>Gráfico 4</h3>
+        
+      </article>
+	  </section>
+
+
+	<footer class="dock-footer">
   <nav class="dock">
     <a href="landing.html">👤</a>
 	<a href="indicadores.html">📊</a>
-	<a href="#">⚙️</a>
+	<a href="newindex.html">⚙️</a>
     <a href="../index.html">❌</a>
   </nav>
-  <!-- Scripts -->
-  <script src="../script_index.js"></script>
-  <script>
-    const baseConfig = (label, color) => ({
-      type: "bar",
-      data: {
-        labels: ["Muy Bajo", "Bajo", "Medio", "Alto", "Muy Alto"],
-        datasets: [{
-          label: label,
-          data: [5, 15, 40, 25, 15],
-          backgroundColor: color,
-          borderRadius: 8
-        }]
-      },
-      options: {
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { ticks: { color: "#ffffff" } },
-          y: { beginAtZero: true, ticks: { stepSize: 10, color: "#ffffff" } }
-        }
-      }
-    });
+</footer>
+  </main>
 
-    new Chart(document.getElementById("chartEstres"), baseConfig("Estrés", "#274f9e"));
-    new Chart(document.getElementById("chartSueno"), baseConfig("Sueño", "#274f9e"));
-    new Chart(document.getElementById("chartFatiga"), baseConfig("Fatiga", "#274f9e"));
-  </script>
+  <!-- Modal de cuestionarios -->
+  <dialog id="quizModal" aria-labelledby="quizTitle">
+    <div class="modal-header">
+      <strong id="quizTitle">Cuestionario</strong>
+      <button class="btn secondary" id="closeModal">Salir</button>
+    </div>
+    <form id="quizForm" class="modal-body">
+      <!-- Preguntas se inyectan dinámicamente -->
+    </form>
+    <div class="modal-footer">
+      <span id="scoreHint" class="subtitle" aria-live="polite"></span>
+	  
+      <button class="btn" id="submitQuiz">Enviar</button>
+    </div>
+	
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <canvas class="confetti" id="confetti" width="0" height="0"></canvas>
+
+
+ 
 </body>
 </html>
